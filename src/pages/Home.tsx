@@ -10,35 +10,43 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-hero-gradient opacity-95" />
         <div className="absolute inset-0">
-          <img 
-            src={heroImage} 
-            alt="Mentorship" 
+          <img
+            src={heroImage}
+            alt="Mentorship"
             className="w-full h-full object-cover opacity-20"
           />
         </div>
-        
+
         <div className="relative container mx-auto px-4 py-20 md:py-32">
           <div className="max-w-3xl animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6">
-              Empowering Growth Through Mentorship
+              A Mentorship Sanctuary for the Quietly Bold
             </h1>
             <p className="text-xl text-primary-foreground/90 mb-8">
-              Connect with experienced mentors who will guide you on your journey to personal and professional excellence.
+              Connect with experienced mentors who will guide you on your
+              journey to personal and professional excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/signup?type=mentee">
                 <Button size="lg" variant="secondary" className="group">
                   Find a Mentor
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                  <ArrowRight
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                    size={20}
+                  />
                 </Button>
               </Link>
               <Link to="/signup?type=mentor">
-                <Button size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20"
+                >
                   Become a Mentor
                 </Button>
               </Link>
@@ -55,7 +63,8 @@ const Home = () => {
               Why Choose FrankMolla?
             </h2>
             <p className="text-text-body max-w-2xl mx-auto">
-              We're committed to creating meaningful connections that foster growth, learning, and success.
+              We're committed to creating meaningful connections that foster
+              growth, learning, and success.
             </p>
           </div>
 
@@ -64,20 +73,27 @@ const Home = () => {
               {
                 icon: Users,
                 title: "Expert Mentors",
-                description: "Connect with experienced professionals who are passionate about sharing their knowledge and helping you succeed."
+                description:
+                  "Connect with experienced professionals who are passionate about sharing their knowledge and helping you succeed.",
               },
               {
                 icon: Target,
                 title: "Personalized Matching",
-                description: "Our intelligent matching system pairs you with mentors who align with your goals and aspirations."
+                description:
+                  "Our intelligent matching system pairs you with mentors who align with your goals and aspirations.",
               },
               {
                 icon: Sparkles,
                 title: "Proven Results",
-                description: "Join thousands of mentees who have achieved their goals through our structured mentorship program."
-              }
+                description:
+                  "Join thousands of mentees who have achieved their goals through our structured mentorship program.",
+              },
             ].map((feature, index) => (
-              <Card key={index} className="border-border hover:border-primary/50 transition-all duration-300 animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card
+                key={index}
+                className="border-border hover:border-primary/50 transition-all duration-300 animate-slide-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
                 <CardContent className="pt-6">
                   <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                     <feature.icon className="text-primary" size={24} />
@@ -85,9 +101,7 @@ const Home = () => {
                   <h3 className="text-xl font-semibold text-text-heading mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-text-body">
-                    {feature.description}
-                  </p>
+                  <p className="text-text-body">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -102,12 +116,16 @@ const Home = () => {
             Ready to Start Your Journey?
           </h2>
           <p className="text-text-body mb-8 max-w-2xl mx-auto">
-            Whether you're looking to grow or share your expertise, FrankMolla is here to connect you with the right people.
+            Whether you're looking to grow or share your expertise, FrankMolla
+            is here to connect you with the right people.
           </p>
           <Link to="/signup">
             <Button size="lg" variant="default" className="group">
               Get Started Today
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+              <ArrowRight
+                className="ml-2 group-hover:translate-x-1 transition-transform"
+                size={20}
+              />
             </Button>
           </Link>
         </div>

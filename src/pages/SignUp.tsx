@@ -2,20 +2,110 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { UserPlus, Users } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
+import { ApplicationSchema, ApplicationFormValues } from "@/schemas/signup";
+import { useSignUp } from "@/hooks/useAuthMutations";
+
+// RHF-related shadcn imports
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const SignUp = () => {
   const [searchParams] = useSearchParams();
   const initialType = searchParams.get("type") || "mentee";
-  const [userType, setUserType] = useState<"mentor" | "mentee">(initialType as "mentor" | "mentee");
+  const navigate = useNavigate();
   const { toast } = useToast();
+  const { mutate: signUp, isPending: isSubmitting } = useSignUp();
+
+  // 1. Initialize RHF with Zod Resolver
+  const form = useForm<ApplicationFormValues>({
+    resolver: zodResolver(ApplicationSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "", // Add a password field here, it's essential for Firebase Auth
+      program: "career", // Set a default value for the Select
+      background: "",
+      userType: initialType as "mentor" | "mentee",
+      experience: 1, // Default for optional field
+    },
+  });
+
+  // 2. Watch the userType and update the form state
+  const userType = form.watch("userType");
+
+  // 3. Define the onSubmit function
+  const onSubmit = (values: ApplicationFormValues) => {
+    // Payload
+    const payload = {
+      email: values.email,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      program: values.program,
+      background: values.background,
+      userType: values.userType,
+      experience: values.experience,
+    };
+    // 1. Call the Firebase SignUp Mutation
+    signUp(payload, {
+      onSuccess: () => {
+        // 2. Show Success Toast
+        toast({
+          title: "Application Submitted!",
+          description: `Success! Please check your email to verify your account and complete your ${values.userType} profile.`,
+        });
+
+        form.reset();
+        // navigate("/verify-email");
+
+        // 3. Redirect to the home page
+        navigate("/");
+
+        // NOTE: In a professional app, you'd also save the rest of the application data
+        // (firstName, program, background, userType) to Firestore in this onSuccess block.
+      },
+      onError: (error) => {
+        // Handle Firebase errors (e.g., email already in use)
+        toast({
+          title: "Sign Up Failed",
+          description: error.message.includes("email-already-in-use")
+            ? "This email is already in use. Please log in or use a different email."
+            : "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      },
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +118,7 @@ const SignUp = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="bg-hero-gradient py-16">
         <div className="container mx-auto px-4">
@@ -52,7 +142,12 @@ const SignUp = () => {
               <Button
                 type="button"
                 variant={userType === "mentee" ? "default" : "outline"}
-                onClick={() => setUserType("mentee")}
+                // onClick={() => setUserType("mentee")}
+                onClick={() =>
+                  form.setValue("userType", "mentee", {
+                    shouldValidate: true,
+                  })
+                }
                 className="h-auto py-6 flex flex-col items-center gap-2"
               >
                 <UserPlus size={24} />
@@ -64,13 +159,20 @@ const SignUp = () => {
               <Button
                 type="button"
                 variant={userType === "mentor" ? "default" : "outline"}
-                onClick={() => setUserType("mentor")}
+                // onClick={() => setUserType("mentor")}
+                onClick={() =>
+                  form.setValue("userType", "mentor", {
+                    shouldValidate: true,
+                  })
+                }
                 className="h-auto py-6 flex flex-col items-center gap-2"
               >
                 <Users size={24} />
                 <div>
                   <div className="font-semibold">Become a Mentor</div>
-                  <div className="text-xs opacity-80">I want to help others</div>
+                  <div className="text-xs opacity-80">
+                    I want to help others
+                  </div>
                 </div>
               </Button>
             </div>
@@ -78,74 +180,195 @@ const SignUp = () => {
             <Card className="border-border">
               <CardHeader>
                 <CardTitle>
-                  {userType === "mentee" ? "Mentee Application" : "Mentor Application"}
+                  {userType === "mentee"
+                    ? "Mentee Application"
+                    : "Mentor Application"}
                 </CardTitle>
                 <CardDescription>
-                  {userType === "mentee" 
+                  {userType === "mentee"
                     ? "Tell us about yourself and what you're looking for in a mentor."
                     : "Share your experience and how you'd like to help others grow."}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" required />
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                  >
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {/* First Name Field */}
+                      <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                          <FormItem className="space-y-2">
+                            <FormLabel htmlFor="firstName">
+                              First Name
+                            </FormLabel>
+                            <FormControl>
+                              <Input id="firstName" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Last Name Field */}
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem className="space-y-2">
+                            <FormLabel htmlFor="lastName">Last Name</FormLabel>
+                            <FormControl>
+                              <Input id="lastName" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" required />
-                    </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" required />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="program">Area of Interest</Label>
-                    <Select required>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a program" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="career">Career Development</SelectItem>
-                        <SelectItem value="entrepreneurship">Entrepreneurship</SelectItem>
-                        <SelectItem value="academic">Academic Mentorship</SelectItem>
-                        <SelectItem value="creative">Creative Skills</SelectItem>
-                        <SelectItem value="personal">Personal Growth</SelectItem>
-                        <SelectItem value="networking">Networking & Connections</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {userType === "mentor" && (
-                    <div className="space-y-2">
-                      <Label htmlFor="experience">Years of Experience</Label>
-                      <Input id="experience" type="number" min="1" required />
-                    </div>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label htmlFor="background">
-                      {userType === "mentee" ? "Tell us about your goals" : "Share your expertise"}
-                    </Label>
-                    <Textarea 
-                      id="background" 
-                      rows={4}
-                      placeholder={userType === "mentee" 
-                        ? "What are you hoping to achieve? What challenges are you facing?"
-                        : "What's your professional background? What areas can you mentor in?"}
-                      required 
+                    {/* Email Field */}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel htmlFor="email">Email Address</FormLabel>
+                          <FormControl>
+                            <Input id="email" type="email" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
 
-                  <Button type="submit" className="w-full" size="lg">
-                    Submit Application
-                  </Button>
-                </form>
+                    {/* NEW: Password Field (Crucial for Firebase Auth) */}
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel htmlFor="password">Password</FormLabel>
+                          <FormControl>
+                            <Input id="password" type="password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Area of Interest (Select) Field */}
+                    <FormField
+                      control={form.control}
+                      name="program"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel htmlFor="program">
+                            Area of Interest
+                          </FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a program" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {/* ... Your SelectItem values remain the same */}
+                              <SelectItem value="career">
+                                Career Development
+                              </SelectItem>
+                              <SelectItem value="entrepreneurship">
+                                Entrepreneurship
+                              </SelectItem>
+                              <SelectItem value="academic">
+                                Academic Mentorship
+                              </SelectItem>
+                              <SelectItem value="creative">
+                                Creative Skills
+                              </SelectItem>
+                              <SelectItem value="personal">
+                                Personal Growth
+                              </SelectItem>
+                              <SelectItem value="networking">
+                                Networking & Connections
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Years of Experience Field (Mentor Conditional) */}
+                    {userType === "mentor" && (
+                      <FormField
+                        control={form.control}
+                        // The field value must be parsed to a number for Zod
+                        name="experience"
+                        render={({ field }) => (
+                          <FormItem className="space-y-2">
+                            <FormLabel htmlFor="experience">
+                              Years of Experience
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                id="experience"
+                                type="number"
+                                min="1"
+                                {...field}
+                                onChange={(e) =>
+                                  field.onChange(Number(e.target.value))
+                                } // RHF requires number for Zod
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+                    {/* Background Textarea Field */}
+                    <FormField
+                      control={form.control}
+                      name="background"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel htmlFor="background">
+                            {userType === "mentee"
+                              ? "Tell us about your goals"
+                              : "Share your expertise"}
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea
+                              id="background"
+                              rows={4}
+                              placeholder={
+                                userType === "mentee" ? "..." : "..."
+                              } // Your original placeholders
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      size="lg"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit Application"}
+                    </Button>
+                  </form>
+                </Form>
               </CardContent>
             </Card>
           </div>

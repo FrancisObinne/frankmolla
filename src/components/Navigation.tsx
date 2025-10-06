@@ -7,7 +7,6 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
     { to: "/how-it-works", label: "How It Works" },
     { to: "/programs", label: "Programs" },
