@@ -15,16 +15,28 @@ const Footer = () => {
               Empowering growth through meaningful mentorship connections.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Mail size={20} />
               </a>
             </div>
@@ -32,25 +44,39 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-text-heading mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-text-heading mb-4">
+              Quick Links
+            </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/about"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/how-it-works"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link to="/programs" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/programs"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   Programs
                 </Link>
               </li>
@@ -70,20 +96,28 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-text-heading mb-4">Get In Touch</h4>
+            <h4 className="font-semibold text-text-heading mb-4">
+              Get In Touch
+            </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/contact" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/contact"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   Contact Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/signup" className="text-text-body hover:text-primary transition-colors text-sm">
                   Join as Mentor
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link to="/signup" className="text-text-body hover:text-primary transition-colors text-sm">
+                <Link
+                  to="/signup"
+                  className="text-text-body hover:text-primary transition-colors text-sm"
+                >
                   Find a Mentor
                 </Link>
               </li>

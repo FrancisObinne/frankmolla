@@ -5,7 +5,6 @@
  */
 export interface AuthCredentials {
   email: string;
-  password: string;
 }
 
 /**
@@ -15,8 +14,7 @@ export interface AuthCredentials {
 export interface UserProfile {
   uid: string;
   email: string;
-  firstName?: string;
-  lastName?: string;
+  fullName: string;
   isVerified: boolean;
   isMentor?: boolean;
   // Add other profile fields here (e.g., mentorship level, photoUrl)

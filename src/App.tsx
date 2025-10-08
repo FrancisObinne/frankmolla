@@ -19,6 +19,13 @@ import ProfilePage from "./pages/ProfilePage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import AdminLogin from "./pages/AdminLogin";
+import Dashboard from "./pages/admin/Dashboard";
+import Mentors from "./pages/admin/Mentors";
+import Mentees from "./pages/admin/Mentees";
+import Pairings from "./pages/admin/Pairings";
+import AdminApplications from "./pages/AdminApplications";
+import ApplicationDetail from "./pages/ApplicationDetail";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +47,16 @@ const App = () => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/applications" element={<AdminApplications />} />
+            <Route
+              path="/admin/applications/:id"
+              element={<ApplicationDetail />}
+            />
+            {/* <Route path="/admin/mentors" element={<Mentors />} /> */}
+            {/* <Route path="/admin/mentees" element={<Mentees />} /> */}
+            {/* <Route path="/admin/pairings" element={<Pairings />} /> */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             {/* Protected Routes */}
             <Route element={<ProtectedRoute requireVerification={true} />}>
