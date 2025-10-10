@@ -8,80 +8,95 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 30% 15%;
+    /* Base Colors - Using Light/Off-White and Dark Grey */
+    --background: 0 0% 98%; /* Very light background */
+    --foreground: 0 0% 20%; /* Dark Grey for most text/elements (#333333) */
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 15%;
+    --card-foreground: 0 0% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 15%;
+    --popover-foreground: 0 0% 20%;
 
-    --primary: 220 70% 50%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary (CTA) - Red (#E00022) */
+    --primary: 352 100% 44%;
+    --primary-foreground: 0 0% 100%; /* White text on Red */
 
-    --secondary: 170 60% 45%;
+    /* Secondary/Accent - A lighter, desaturated version of the Dark Grey for text/elements that are less important than primary */
+    --secondary: 0 0% 40%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 15% 96%;
-    --muted-foreground: 220 15% 45%;
+    /* Muted/Subtle - Light Grey */
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%; /* Lighter grey text on muted background */
 
-    --accent: 35 85% 55%;
+    /* Accent - A darker version of Red for hover/focus */
+    --accent: 352 100% 35%;
     --accent-foreground: 0 0% 100%;
 
+    /* Destructive - Keeping it a clear red for warnings */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 220 70% 50%;
+    /* Borders and Rings */
+    --border: 0 0% 80%;
+    --input: 0 0% 80%;
+    --ring: 352 100% 44%; /* Ring matches Primary Red */
 
     --radius: 0.75rem;
 
     /* Custom tokens for FrankMolla */
-    --hero-gradient-from: 220 70% 55%;
-    --hero-gradient-to: 170 60% 50%;
-    
-    --text-heading: 220 30% 15%;
-    --text-body: 220 20% 30%;
-    --text-light: 220 15% 55%;
+    --hero-gradient-from: 352 100% 50%; /* Lighter Red */
+    --hero-gradient-to: 0 0% 20%; /* Dark Grey */
+
+    --text-heading: 0 0% 20%; /* Dark Grey */
+    --text-body: 0 0% 25%; /* Slightly lighter Dark Grey */
+    --text-light: 0 0% 45%; /* Medium Grey */
   }
 
   .dark {
-    --background: 220 30% 8%;
-    --foreground: 0 0% 98%;
+    /* Dark Mode Base Colors - Using Dark Grey for Background and Off-White for Foreground */
+    --background: 0 0% 10%; /* Very dark background (slightly darker than #333333) */
+    --foreground: 0 0% 95%; /* Off-white text */
 
-    --card: 220 25% 12%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 220 25% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 220 70% 60%;
+    /* Primary (CTA) - Red (#E00022) - Adjusted lightness for dark mode contrast */
+    --primary: 352 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 170 60% 50%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary/Accent - A lighter Grey for less important elements */
+    --secondary: 0 0% 60%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 220 20% 18%;
-    --muted-foreground: 220 15% 65%;
+    /* Muted/Subtle - Darker Grey */
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 35 85% 60%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - A brighter Red for dark mode hover/focus */
+    --accent: 352 100% 60%;
+    --accent-foreground: 0 0% 10%;
 
+    /* Destructive - Keeping it a clear red for warnings */
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 220 70% 60%;
+    /* Borders and Rings */
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 352 100% 50%;
 
-    --hero-gradient-from: 220 70% 45%;
-    --hero-gradient-to: 170 60% 45%;
-    
-    --text-heading: 0 0% 98%;
-    --text-body: 0 0% 90%;
-    --text-light: 220 15% 70%;
+    /* Custom tokens for FrankMolla */
+    --hero-gradient-from: 352 100% 40%; /* Darker Red */
+    --hero-gradient-to: 0 0% 15%; /* Dark background */
+
+    --text-heading: 0 0% 95%; /* Off-white */
+    --text-body: 0 0% 85%; /* Lighter off-white */
+    --text-light: 0 0% 65%; /* Medium-light grey */
   }
 }
 

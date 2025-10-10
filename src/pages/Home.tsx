@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Users, Target, Sparkles } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import heroImage from "@/assets/hero-mentorship.jpg";
+import heroImage from "@/assets/hero-mentorship-2.jpg";
 
 const Home = () => {
   return (

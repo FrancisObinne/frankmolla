@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Linkedin, Twitter, Facebook } from "lucide-react";
+import brandLogo from "../assets/brand-logo.png";
 
 const Footer = () => {
   return (
@@ -8,9 +9,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
-              FrankMolla
-            </h3>
+            <img
+              src={brandLogo}
+              alt="FrankMolla Logo"
+              // 3. Add Tailwind classes for sizing (e.g., h-8 or w-32)
+              className="h-8 w-auto mb-2" // h-8 matches the size used in the navigation
+            />
             <p className="text-text-body text-sm">
               Empowering growth through meaningful mentorship connections.
             </p>

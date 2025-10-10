@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import brandIcon from "@/assets/brand-icon.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,12 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
-              FrankMolla
-            </span>
+            <img
+              src={brandIcon}
+              alt="FrankMolla Logo"
+              // 3. Add Tailwind classes for sizing (e.g., h-8 or w-32)
+              className="h-8 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
