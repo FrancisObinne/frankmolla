@@ -72,8 +72,6 @@ export const useSignUp = (
             <p>A new application has been submitted by: <strong>${payload.fullName}</strong>.</p>
             <p><strong>Email:</strong> ${payload.email}</p>
             <p><strong>Role/Org:</strong> ${payload.roleTitle} at ${payload.organization}</p>
-            <p>View the full details in the 'applications' collection in Firestore.</p>
-            <p>Please review the new application at your earliest convenience.</p>
           `,
         },
         sentAt: serverTimestamp(),
