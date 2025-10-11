@@ -1,87 +1,536 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { Button } from "@/components/ui/button";
+// import { useEffect, useState } from "react";
+// import { supabase } from "@/integrations/supabase/client";
+// import { useAdminAuth } from "@/hooks/useAdminAuth";
+// import { Button } from "@/components/ui/button";
+// import { useNavigate } from "react-router-dom";
+// import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+// import { useToast } from "@/hooks/use-toast";
+// import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Label } from "@/components/ui/label";
+// import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+
+// interface Pairing {
+//   id: string;
+//   status: string;
+//   notes: string | null;
+//   created_at: string;
+//   mentor_id: string;
+//   mentee_id: string;
+// }
+
+// interface Mentor {
+//   id: string;
+//   full_name: string;
+// }
+
+// interface Mentee {
+//   id: string;
+//   full_name: string;
+// }
+
+// const Pairings = () => {
+//   const { loading, user } = useAdminAuth();
+//   const [pairings, setPairings] = useState<Pairing[]>([]);
+//   const [mentors, setMentors] = useState<Mentor[]>([]);
+//   const [mentees, setMentees] = useState<Mentee[]>([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [isDialogOpen, setIsDialogOpen] = useState(false);
+//   const [newPairing, setNewPairing] = useState({
+//     mentor_id: "",
+//     mentee_id: "",
+//     status: "pending",
+//     notes: "",
+//   });
+//   const navigate = useNavigate();
+//   const { toast } = useToast();
+
+//   useEffect(() => {
+//     if (!loading) {
+//       loadData();
+//     }
+//   }, [loading]);
+
+//   const loadData = async () => {
+//     try {
+//       const [pairingsRes, mentorsRes, menteesRes] = await Promise.all([
+//         supabase.from("mentorship_pairings").select("*").order("created_at", { ascending: false }),
+//         supabase.from("mentors").select("id, full_name"),
+//         supabase.from("mentees").select("id, full_name"),
+//       ]);
+
+//       if (pairingsRes.error) throw pairingsRes.error;
+//       if (mentorsRes.error) throw mentorsRes.error;
+//       if (menteesRes.error) throw menteesRes.error;
+
+//       setPairings(pairingsRes.data || []);
+//       setMentors(mentorsRes.data || []);
+//       setMentees(menteesRes.data || []);
+//     } catch (error: any) {
+//       toast({
+//         title: "Error loading data",
+//         description: error.message,
+//         variant: "destructive",
+//       });
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const handleCreatePairing = async () => {
+//     if (!newPairing.mentor_id || !newPairing.mentee_id) {
+//       toast({
+//         title: "Error",
+//         description: "Please select both mentor and mentee",
+//         variant: "destructive",
+//       });
+//       return;
+//     }
+
+//     try {
+//       const { error } = await supabase.from("mentorship_pairings").insert({
+//         mentor_id: newPairing.mentor_id,
+//         mentee_id: newPairing.mentee_id,
+//         status: newPairing.status,
+//         notes: newPairing.notes || null,
+//         created_by: user?.id,
+//       });
+
+//       if (error) throw error;
+
+//       toast({
+//         title: "Success",
+//         description: "Pairing created successfully",
+//       });
+
+//       setIsDialogOpen(false);
+//       setNewPairing({ mentor_id: "", mentee_id: "", status: "pending", notes: "" });
+//       loadData();
+//     } catch (error: any) {
+//       toast({
+//         title: "Error creating pairing",
+//         description: error.message,
+//         variant: "destructive",
+//       });
+//     }
+//   };
+
+//   const handleDelete = async (id: string) => {
+//     try {
+//       const { error } = await supabase.from("mentorship_pairings").delete().eq("id", id);
+
+//       if (error) throw error;
+
+//       toast({
+//         title: "Success",
+//         description: "Pairing deleted successfully",
+//       });
+
+//       loadData();
+//     } catch (error: any) {
+//       toast({
+//         title: "Error deleting pairing",
+//         description: error.message,
+//         variant: "destructive",
+//       });
+//     }
+//   };
+
+//   const getMentorName = (mentorId: string) => {
+//     return mentors.find(m => m.id === mentorId)?.full_name || "Unknown";
+//   };
+
+//   const getMenteeName = (menteeId: string) => {
+//     return mentees.find(m => m.id === menteeId)?.full_name || "Unknown";
+//   };
+
+//   const getStatusBadge = (status: string) => {
+//     const colors = {
+//       pending: "bg-yellow-100 text-yellow-800",
+//       active: "bg-green-100 text-green-800",
+//       completed: "bg-blue-100 text-blue-800",
+//       cancelled: "bg-red-100 text-red-800",
+//     };
+//     return colors[status as keyof typeof colors] || "bg-gray-100 text-gray-800";
+//   };
+
+//   if (loading || isLoading) {
+//     return (
+//       <div className="flex items-center justify-center min-h-screen">
+//         <div className="animate-pulse text-lg">Loading...</div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-background">
+//       <header className="border-b bg-card">
+//         <div className="container mx-auto px-4 py-4">
+//           <div className="flex items-center justify-between">
+//             <div className="flex items-center gap-4">
+//               <Button variant="ghost" onClick={() => navigate("/admin/dashboard")}>
+//                 <ArrowLeft className="h-4 w-4 mr-2" />
+//                 Back
+//               </Button>
+//               <h1 className="text-2xl font-bold">Manage Pairings</h1>
+//             </div>
+//             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+//               <DialogTrigger asChild>
+//                 <Button>
+//                   <Plus className="h-4 w-4 mr-2" />
+//                   Create Pairing
+//                 </Button>
+//               </DialogTrigger>
+//               <DialogContent>
+//                 <DialogHeader>
+//                   <DialogTitle>Create New Pairing</DialogTitle>
+//                   <DialogDescription>Match a mentor with a mentee</DialogDescription>
+//                 </DialogHeader>
+//                 <div className="space-y-4 py-4">
+//                   <div className="space-y-2">
+//                     <Label>Mentor</Label>
+//                     <Select value={newPairing.mentor_id} onValueChange={(value) => setNewPairing({ ...newPairing, mentor_id: value })}>
+//                       <SelectTrigger>
+//                         <SelectValue placeholder="Select mentor" />
+//                       </SelectTrigger>
+//                       <SelectContent>
+//                         {mentors.map((mentor) => (
+//                           <SelectItem key={mentor.id} value={mentor.id}>
+//                             {mentor.full_name}
+//                           </SelectItem>
+//                         ))}
+//                       </SelectContent>
+//                     </Select>
+//                   </div>
+//                   <div className="space-y-2">
+//                     <Label>Mentee</Label>
+//                     <Select value={newPairing.mentee_id} onValueChange={(value) => setNewPairing({ ...newPairing, mentee_id: value })}>
+//                       <SelectTrigger>
+//                         <SelectValue placeholder="Select mentee" />
+//                       </SelectTrigger>
+//                       <SelectContent>
+//                         {mentees.map((mentee) => (
+//                           <SelectItem key={mentee.id} value={mentee.id}>
+//                             {mentee.full_name}
+//                           </SelectItem>
+//                         ))}
+//                       </SelectContent>
+//                     </Select>
+//                   </div>
+//                   <div className="space-y-2">
+//                     <Label>Status</Label>
+//                     <Select value={newPairing.status} onValueChange={(value) => setNewPairing({ ...newPairing, status: value })}>
+//                       <SelectTrigger>
+//                         <SelectValue />
+//                       </SelectTrigger>
+//                       <SelectContent>
+//                         <SelectItem value="pending">Pending</SelectItem>
+//                         <SelectItem value="active">Active</SelectItem>
+//                         <SelectItem value="completed">Completed</SelectItem>
+//                         <SelectItem value="cancelled">Cancelled</SelectItem>
+//                       </SelectContent>
+//                     </Select>
+//                   </div>
+//                   <div className="space-y-2">
+//                     <Label>Notes (Optional)</Label>
+//                     <Textarea
+//                       value={newPairing.notes}
+//                       onChange={(e) => setNewPairing({ ...newPairing, notes: e.target.value })}
+//                       placeholder="Add notes about this pairing..."
+//                     />
+//                   </div>
+//                 </div>
+//                 <DialogFooter>
+//                   <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+//                     Cancel
+//                   </Button>
+//                   <Button onClick={handleCreatePairing}>Create</Button>
+//                 </DialogFooter>
+//               </DialogContent>
+//             </Dialog>
+//           </div>
+//         </div>
+//       </header>
+
+//       <main className="container mx-auto px-4 py-8">
+//         <Card>
+//           <CardHeader>
+//             <CardTitle>All Pairings ({pairings.length})</CardTitle>
+//           </CardHeader>
+//           <CardContent>
+//             <Table>
+//               <TableHeader>
+//                 <TableRow>
+//                   <TableHead>Mentor</TableHead>
+//                   <TableHead>Mentee</TableHead>
+//                   <TableHead>Status</TableHead>
+//                   <TableHead>Notes</TableHead>
+//                   <TableHead>Created</TableHead>
+//                   <TableHead>Actions</TableHead>
+//                 </TableRow>
+//               </TableHeader>
+//               <TableBody>
+//                 {pairings.map((pairing) => (
+//                   <TableRow key={pairing.id}>
+//                     <TableCell className="font-medium">{getMentorName(pairing.mentor_id)}</TableCell>
+//                     <TableCell>{getMenteeName(pairing.mentee_id)}</TableCell>
+//                     <TableCell>
+//                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(pairing.status)}`}>
+//                         {pairing.status}
+//                       </span>
+//                     </TableCell>
+//                     <TableCell className="max-w-xs truncate">{pairing.notes || "-"}</TableCell>
+//                     <TableCell>{new Date(pairing.created_at).toLocaleDateString()}</TableCell>
+//                     <TableCell>
+//                       <AlertDialog>
+//                         <AlertDialogTrigger asChild>
+//                           <Button variant="destructive" size="sm">
+//                             <Trash2 className="h-4 w-4" />
+//                           </Button>
+//                         </AlertDialogTrigger>
+//                         <AlertDialogContent>
+//                           <AlertDialogHeader>
+//                             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+//                             <AlertDialogDescription>
+//                               This will permanently delete this pairing. This action cannot be undone.
+//                             </AlertDialogDescription>
+//                           </AlertDialogHeader>
+//                           <AlertDialogFooter>
+//                             <AlertDialogCancel>Cancel</AlertDialogCancel>
+//                             <AlertDialogAction onClick={() => handleDelete(pairing.id)}>
+//                               Delete
+//                             </AlertDialogAction>
+//                           </AlertDialogFooter>
+//                         </AlertDialogContent>
+//                       </AlertDialog>
+//                     </TableCell>
+//                   </TableRow>
+//                 ))}
+//               </TableBody>
+//             </Table>
+//           </CardContent>
+//         </Card>
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default Pairings;
+
+// src/pages/Pairings.tsx
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+// Use TanStack Query hooks for all data operations
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { db } from "@/firebase/config";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  addDoc,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useToast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+// UI Components
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
+// Lucide Icons
+import { ArrowLeft, Plus, Trash2, Loader2 } from "lucide-react";
+
+// --- Data Interfaces (Using Firebase conventions) ---
 interface Pairing {
   id: string;
-  status: string;
+  status: "pending" | "active" | "completed" | "cancelled";
   notes: string | null;
-  created_at: string;
-  mentor_id: string;
-  mentee_id: string;
+  createdAt: Date; // Changed to Date
+  mentorId: string; // Changed from mentor_id
+  menteeId: string; // Changed from mentee_id
+  createdBy?: string; // Optional field for tracking
 }
 
-interface Mentor {
+interface UserSummary {
   id: string;
-  full_name: string;
+  fullName: string; // Changed from full_name
 }
 
-interface Mentee {
-  id: string;
-  full_name: string;
+// --- TanStack Query Data Fetching Hooks ---
+
+// 1. Fetch Pairings
+const fetchPairings = async (): Promise<Pairing[]> => {
+  const pairingsRef = collection(db, "mentorship_pairings");
+  const q = query(pairingsRef, orderBy("createdAt", "desc"));
+
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      status: data.status,
+      notes: data.notes || null,
+      mentorId: data.mentorId || data.mentor_id,
+      menteeId: data.menteeId || data.mentee_id,
+      createdAt: data.createdAt?.toDate
+        ? data.createdAt.toDate()
+        : new Date(data.created_at || data.createdAt),
+    } as Pairing;
+  });
+};
+
+// 2. Fetch User Summaries (Mentors/Mentees)
+const fetchUserSummaries = async (
+  collectionName: string
+): Promise<UserSummary[]> => {
+  const usersRef = collection(db, collectionName);
+  const q = query(usersRef, orderBy("fullName", "asc"));
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      fullName: data.fullName || data.full_name, // Handle naming differences
+    } as UserSummary;
+  });
+};
+
+export const usePairingsData = () => {
+  // Parallel queries for all necessary data
+  return useQuery({
+    queryKey: ["pairingsData"],
+    queryFn: async () => {
+      const [pairings, mentors, mentees] = await Promise.all([
+        fetchPairings(),
+        fetchUserSummaries("mentors"), // Assuming 'mentors' is the collection name
+        fetchUserSummaries("mentees"), // Assuming 'mentees' is the collection name
+      ]);
+      return { pairings, mentors, mentees };
+    },
+  });
+};
+
+// --- TanStack Query Mutation Hooks ---
+
+interface NewPairingData {
+  mentorId: string;
+  menteeId: string;
+  status: string;
+  notes: string;
+  createdBy: string;
 }
+
+// 1. Create Pairing Mutation
+export const useCreatePairingMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: NewPairingData) => {
+      const pairingsRef = collection(db, "mentorship_pairings");
+      await addDoc(pairingsRef, {
+        mentorId: data.mentorId,
+        menteeId: data.menteeId,
+        status: data.status,
+        notes: data.notes || null,
+        createdBy: data.createdBy,
+        createdAt: serverTimestamp(),
+      });
+    },
+    // Invalidate the main query to refetch all data after creation
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["pairingsData"] });
+    },
+  });
+};
+
+// 2. Delete Pairing Mutation
+export const useDeletePairingMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const docRef = doc(db, "mentorship_pairings", id);
+      await deleteDoc(docRef);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["pairingsData"] });
+    },
+  });
+};
+
+// -------------------------------------------------------------------
+// --- Pairings Component ---
+// -------------------------------------------------------------------
 
 const Pairings = () => {
-  const { loading, user } = useAdminAuth();
-  const [pairings, setPairings] = useState<Pairing[]>([]);
-  const [mentors, setMentors] = useState<Mentor[]>([]);
-  const [mentees, setMentees] = useState<Mentee[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [newPairing, setNewPairing] = useState({
-    mentor_id: "",
-    mentee_id: "",
-    status: "pending",
-    notes: "",
-  });
+  const { loading: authLoading, user } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (!loading) {
-      loadData();
-    }
-  }, [loading]);
+  // Use the combined query hook
+  const { data, isLoading: dataLoading, error: dataError } = usePairingsData();
 
-  const loadData = async () => {
-    try {
-      const [pairingsRes, mentorsRes, menteesRes] = await Promise.all([
-        supabase.from("mentorship_pairings").select("*").order("created_at", { ascending: false }),
-        supabase.from("mentors").select("id, full_name"),
-        supabase.from("mentees").select("id, full_name"),
-      ]);
+  const createMutation = useCreatePairingMutation();
+  const deleteMutation = useDeletePairingMutation();
 
-      if (pairingsRes.error) throw pairingsRes.error;
-      if (mentorsRes.error) throw mentorsRes.error;
-      if (menteesRes.error) throw menteesRes.error;
+  const pairings = data?.pairings || [];
+  const mentors = data?.mentors || [];
+  const mentees = data?.mentees || [];
 
-      setPairings(pairingsRes.data || []);
-      setMentors(mentorsRes.data || []);
-      setMentees(menteesRes.data || []);
-    } catch (error: any) {
-      toast({
-        title: "Error loading data",
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [newPairing, setNewPairing] = useState({
+    mentorId: "",
+    menteeId: "",
+    status: "pending",
+    notes: "",
+  });
 
   const handleCreatePairing = async () => {
-    if (!newPairing.mentor_id || !newPairing.mentee_id) {
+    if (!newPairing.mentorId || !newPairing.menteeId) {
       toast({
         title: "Error",
         description: "Please select both mentor and mentee",
@@ -90,16 +539,23 @@ const Pairings = () => {
       return;
     }
 
-    try {
-      const { error } = await supabase.from("mentorship_pairings").insert({
-        mentor_id: newPairing.mentor_id,
-        mentee_id: newPairing.mentee_id,
-        status: newPairing.status,
-        notes: newPairing.notes || null,
-        created_by: user?.id,
+    if (!user?.uid) {
+      toast({
+        title: "Error",
+        description: "Admin user ID is missing. Cannot create pairing.",
+        variant: "destructive",
       });
+      return;
+    }
 
-      if (error) throw error;
+    try {
+      await createMutation.mutateAsync({
+        mentorId: newPairing.mentorId,
+        menteeId: newPairing.menteeId,
+        status: newPairing.status,
+        notes: newPairing.notes,
+        createdBy: user.uid,
+      });
 
       toast({
         title: "Success",
@@ -107,12 +563,16 @@ const Pairings = () => {
       });
 
       setIsDialogOpen(false);
-      setNewPairing({ mentor_id: "", mentee_id: "", status: "pending", notes: "" });
-      loadData();
+      setNewPairing({
+        mentorId: "",
+        menteeId: "",
+        status: "pending",
+        notes: "",
+      });
     } catch (error: any) {
       toast({
         title: "Error creating pairing",
-        description: error.message,
+        description: error.message || "An unexpected error occurred.",
         variant: "destructive",
       });
     }
@@ -120,31 +580,27 @@ const Pairings = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const { error } = await supabase.from("mentorship_pairings").delete().eq("id", id);
-      
-      if (error) throw error;
-      
+      await deleteMutation.mutateAsync(id);
+
       toast({
         title: "Success",
         description: "Pairing deleted successfully",
       });
-      
-      loadData();
     } catch (error: any) {
       toast({
         title: "Error deleting pairing",
-        description: error.message,
+        description: error.message || "An unexpected error occurred.",
         variant: "destructive",
       });
     }
   };
 
   const getMentorName = (mentorId: string) => {
-    return mentors.find(m => m.id === mentorId)?.full_name || "Unknown";
+    return mentors.find((m) => m.id === mentorId)?.fullName || "Unknown";
   };
 
   const getMenteeName = (menteeId: string) => {
-    return mentees.find(m => m.id === menteeId)?.full_name || "Unknown";
+    return mentees.find((m) => m.id === menteeId)?.fullName || "Unknown";
   };
 
   const getStatusBadge = (status: string) => {
@@ -157,10 +613,28 @@ const Pairings = () => {
     return colors[status as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
 
-  if (loading || isLoading) {
+  if (
+    authLoading ||
+    dataLoading ||
+    createMutation.isPending ||
+    deleteMutation.isPending
+  ) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-pulse text-lg">Loading...</div>
+        <Loader2 className="h-8 w-8 animate-spin text-primary mr-2" />
+        <span className="text-lg">
+          {authLoading ? "Checking permissions..." : "Loading pairings data..."}
+        </span>
+      </div>
+    );
+  }
+
+  if (dataError) {
+    return (
+      <div className="container mx-auto p-8">
+        <div className="text-red-600 p-4 border border-red-300 rounded-lg">
+          **Error loading pairings:** {dataError.message}
+        </div>
       </div>
     );
   }
@@ -171,7 +645,10 @@ const Pairings = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" onClick={() => navigate("/admin/dashboard")}>
+              <Button
+                variant="ghost"
+                onClick={() => navigate("/admin/dashboard")}
+              >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -179,7 +656,7 @@ const Pairings = () => {
             </div>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button>
+                <Button disabled={mentors.length === 0 || mentees.length === 0}>
                   <Plus className="h-4 w-4 mr-2" />
                   Create Pairing
                 </Button>
@@ -187,19 +664,26 @@ const Pairings = () => {
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Create New Pairing</DialogTitle>
-                  <DialogDescription>Match a mentor with a mentee</DialogDescription>
+                  <DialogDescription>
+                    Match a mentor with a mentee
+                  </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
                     <Label>Mentor</Label>
-                    <Select value={newPairing.mentor_id} onValueChange={(value) => setNewPairing({ ...newPairing, mentor_id: value })}>
+                    <Select
+                      value={newPairing.mentorId}
+                      onValueChange={(value) =>
+                        setNewPairing({ ...newPairing, mentorId: value })
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select mentor" />
                       </SelectTrigger>
                       <SelectContent>
                         {mentors.map((mentor) => (
                           <SelectItem key={mentor.id} value={mentor.id}>
-                            {mentor.full_name}
+                            {mentor.fullName}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -207,14 +691,19 @@ const Pairings = () => {
                   </div>
                   <div className="space-y-2">
                     <Label>Mentee</Label>
-                    <Select value={newPairing.mentee_id} onValueChange={(value) => setNewPairing({ ...newPairing, mentee_id: value })}>
+                    <Select
+                      value={newPairing.menteeId}
+                      onValueChange={(value) =>
+                        setNewPairing({ ...newPairing, menteeId: value })
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select mentee" />
                       </SelectTrigger>
                       <SelectContent>
                         {mentees.map((mentee) => (
                           <SelectItem key={mentee.id} value={mentee.id}>
-                            {mentee.full_name}
+                            {mentee.fullName}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -222,7 +711,15 @@ const Pairings = () => {
                   </div>
                   <div className="space-y-2">
                     <Label>Status</Label>
-                    <Select value={newPairing.status} onValueChange={(value) => setNewPairing({ ...newPairing, status: value })}>
+                    <Select
+                      value={newPairing.status}
+                      onValueChange={(value) =>
+                        setNewPairing({
+                          ...newPairing,
+                          status: value as Pairing["status"],
+                        })
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -238,16 +735,30 @@ const Pairings = () => {
                     <Label>Notes (Optional)</Label>
                     <Textarea
                       value={newPairing.notes}
-                      onChange={(e) => setNewPairing({ ...newPairing, notes: e.target.value })}
+                      onChange={(e) =>
+                        setNewPairing({ ...newPairing, notes: e.target.value })
+                      }
                       placeholder="Add notes about this pairing..."
                     />
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsDialogOpen(false)}
+                  >
                     Cancel
                   </Button>
-                  <Button onClick={handleCreatePairing}>Create</Button>
+                  <Button
+                    onClick={handleCreatePairing}
+                    disabled={createMutation.isPending}
+                  >
+                    {createMutation.isPending ? (
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    ) : (
+                      "Create"
+                    )}
+                  </Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -273,42 +784,71 @@ const Pairings = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {pairings.map((pairing) => (
-                  <TableRow key={pairing.id}>
-                    <TableCell className="font-medium">{getMentorName(pairing.mentor_id)}</TableCell>
-                    <TableCell>{getMenteeName(pairing.mentee_id)}</TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(pairing.status)}`}>
-                        {pairing.status}
-                      </span>
-                    </TableCell>
-                    <TableCell className="max-w-xs truncate">{pairing.notes || "-"}</TableCell>
-                    <TableCell>{new Date(pairing.created_at).toLocaleDateString()}</TableCell>
-                    <TableCell>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="destructive" size="sm">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This will permanently delete this pairing. This action cannot be undone.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(pairing.id)}>
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
+                {pairings.length > 0 ? (
+                  pairings.map((pairing) => (
+                    <TableRow key={pairing.id}>
+                      <TableCell className="font-medium">
+                        {getMentorName(pairing.mentorId)}
+                      </TableCell>
+                      <TableCell>{getMenteeName(pairing.menteeId)}</TableCell>
+                      <TableCell>
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getStatusBadge(
+                            pairing.status
+                          )}`}
+                        >
+                          {pairing.status}
+                        </span>
+                      </TableCell>
+                      <TableCell className="max-w-xs truncate">
+                        {pairing.notes || "-"}
+                      </TableCell>
+                      <TableCell>
+                        {pairing.createdAt.toLocaleDateString()}
+                      </TableCell>
+                      <TableCell>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              disabled={deleteMutation.isPending}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will permanently delete this pairing. This
+                                action cannot be undone.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleDelete(pairing.id)}
+                                disabled={deleteMutation.isPending}
+                              >
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={6}
+                      className="text-center py-8 text-muted-foreground"
+                    >
+                      No mentorship pairings exist yet.
                     </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </CardContent>

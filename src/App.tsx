@@ -54,9 +54,9 @@ const App = () => (
               path="/admin/applications/:id"
               element={<ApplicationDetail />}
             />
-            {/* <Route path="/admin/mentors" element={<Mentors />} /> */}
-            {/* <Route path="/admin/mentees" element={<Mentees />} /> */}
-            {/* <Route path="/admin/pairings" element={<Pairings />} /> */}
+            <Route path="/admin/mentors" element={<Mentors />} />
+            <Route path="/admin/mentees" element={<Mentees />} />
+            <Route path="/admin/pairings" element={<Pairings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             {/* Protected Routes */}
             <Route element={<ProtectedRoute requireVerification={true} />}>

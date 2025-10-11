@@ -25,33 +25,80 @@ interface Application {
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
   // Add other detail fields you expect to see on this page
-  phone?: string;
-  bio?: string;
-  skills?: string[];
+  // phone?: string;
+  // bio?: string;
+  // skills?: string[];
 }
 
 // --- Data Fetching Hook using TanStack Query ---
+// const useApplicationDetail = (id: string) => {
+//   return useQuery({
+//     queryKey: ["application", id],
+//     queryFn: async (): Promise<Application> => {
+//       const docRef = doc(db, "applications", id);
+//       const docSnap = await getDoc(docRef);
+
+//       if (!docSnap.exists()) {
+//         throw new Error("Application not found.");
+//       }
+
+//       const data = docSnap.data();
+
+//       return {
+//         id: docSnap.id,
+//         ...data,
+//         // Convert Firebase Timestamp to JavaScript Date
+//         createdAt: data.createdAt?.toDate
+//           ? data.createdAt.toDate()
+//           : new Date(data.createdAt),
+//       } as Application;
+//     },
+//     // Only run the query if the ID is available
+//     enabled: !!id,
+//   });
+// };
+
+// --- DATA FETCHING HOOK: UPDATED TO CHECK BOTH COLLECTIONS ---
 const useApplicationDetail = (id: string) => {
   return useQuery({
     queryKey: ["application", id],
     queryFn: async (): Promise<Application> => {
-      const docRef = doc(db, "applications", id);
-      const docSnap = await getDoc(docRef);
+      if (!id) throw new Error("Missing application ID.");
 
-      if (!docSnap.exists()) {
-        throw new Error("Application not found.");
+      // 1. Check Mentee Applications collection
+      const menteeDocRef = doc(db, "menteeApplications", id);
+      const menteeDocSnap = await getDoc(menteeDocRef);
+
+      if (menteeDocSnap.exists()) {
+        const data = menteeDocSnap.data();
+        return {
+          id: menteeDocSnap.id,
+          ...data,
+          type: "mentee", // CRITICAL: Assign type based on collection found
+          createdAt: data.createdAt?.toDate
+            ? data.createdAt.toDate()
+            : new Date(data.createdAt),
+        } as Application;
       }
 
-      const data = docSnap.data();
+      // 2. Check Mentor Applications collection
+      const mentorDocRef = doc(db, "mentorApplications", id);
+      const mentorDocSnap = await getDoc(mentorDocRef);
 
-      return {
-        id: docSnap.id,
-        ...data,
-        // Convert Firebase Timestamp to JavaScript Date
-        createdAt: data.createdAt?.toDate
-          ? data.createdAt.toDate()
-          : new Date(data.createdAt),
-      } as Application;
+      if (mentorDocSnap.exists()) {
+        const data = mentorDocSnap.data();
+        return {
+          id: mentorDocSnap.id,
+          ...data,
+          type: "mentor", // CRITICAL: Assign type based on collection found
+          createdAt: data.createdAt?.toDate
+            ? data.createdAt.toDate()
+            : new Date(data.createdAt),
+        } as Application;
+      }
+
+      // 3. If the document is not found in either, fail
+      throw new Error("Application not found.");
     },
     // Only run the query if the ID is available
     enabled: !!id,
@@ -173,7 +220,7 @@ const ApplicationDetail = () => {
                 <p className="text-sm font-medium text-muted-foreground">
                   Phone Number
                 </p>
-                <p className="text-lg">{application.phone || "N/A"}</p>
+                {/* <p className="text-lg">{application.phone || "N/A"}</p> */}
               </div>
             </div>
 
@@ -183,7 +230,7 @@ const ApplicationDetail = () => {
                 Bio / Motivation
               </p>
               <p className="text-base whitespace-pre-wrap">
-                {application.bio || "No detailed bio provided."}
+                {/* {application.bio || "No detailed bio provided."} */}
               </p>
             </div>
 
@@ -193,7 +240,7 @@ const ApplicationDetail = () => {
                 Skills / Areas of Interest
               </p>
               <div className="flex flex-wrap gap-2">
-                {application.skills?.map((skill, index) => (
+                {/* {application.skills?.map((skill, index) => (
                   <span
                     key={index}
                     className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
@@ -202,7 +249,7 @@ const ApplicationDetail = () => {
                   </span>
                 )) || (
                   <span className="text-muted-foreground">None listed.</span>
-                )}
+                )} */}
               </div>
             </div>
 
@@ -210,7 +257,7 @@ const ApplicationDetail = () => {
             <div className="pt-6 flex gap-4">
               {application.status === "pending" && (
                 <>
-                  {/* <Button
+                  <Button
                     className="bg-green-600 hover:bg-green-700"
                     onClick={() =>
                       console.log(
@@ -221,8 +268,8 @@ const ApplicationDetail = () => {
                     disabled // Disable until actual mutation logic is added
                   >
                     <CheckCircle className="h-4 w-4 mr-2" /> Approve Application
-                  </Button> */}
-                  {/* <Button
+                  </Button>
+                  <Button
                     variant="destructive"
                     onClick={() =>
                       console.log(
@@ -233,7 +280,7 @@ const ApplicationDetail = () => {
                     disabled // Disable until actual mutation logic is added
                   >
                     <XCircle className="h-4 w-4 mr-2" /> Reject
-                  </Button> */}
+                  </Button>
                 </>
               )}
               {application.status !== "pending" && (

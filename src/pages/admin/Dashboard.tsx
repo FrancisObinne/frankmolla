@@ -174,7 +174,7 @@ const Dashboard = () => {
             </CardHeader>
           </Card>
 
-          {/* <Card
+          <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/admin/mentees")}
           >
@@ -184,9 +184,21 @@ const Dashboard = () => {
                 View, edit, and manage mentee profiles
               </CardDescription>
             </CardHeader>
-          </Card> */}
+          </Card>
 
-          {/* <Card
+          <Card
+            className="cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => navigate("/admin/mentors")}
+          >
+            <CardHeader>
+              <CardTitle>Manage Mentors</CardTitle>
+              <CardDescription>
+                View, edit, and manage mentor profiles
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/admin/pairings")}
           >
@@ -196,7 +208,7 @@ const Dashboard = () => {
                 Create and track mentorship matches
               </CardDescription>
             </CardHeader>
-          </Card> */}
+          </Card>
         </div>
       </main>
     </div>

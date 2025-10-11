@@ -20,13 +20,36 @@ import { Loader2, ArrowLeft, Eye, FileText } from "lucide-react";
 
 // --- Type Definition for a single Application Document ---
 // Adjust this interface to match your actual Firestore document structure
+// interface Application {
+//   id: string; // Document ID
+//   fullName: string;
+//   email: string;
+//   type: "mentor" | "mentee"; // Assuming a type field exists
+//   status: "pending" | "approved" | "rejected";
+//   createdAt: Date;
+// }
+
 interface Application {
   id: string; // Document ID
   fullName: string;
   email: string;
-  type: "mentor" | "mentee"; // Assuming a type field exists
+  type: "mentor" | "mentee"; // CRITICAL: This field is now set during fetching
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
+  // Include all fields present in ALL_HEADERS for the export to work correctly
+  areasOfInterest?: string[];
+  areasOfExpertise?: string[];
+  cadence?: string;
+  currentChallenge?: string;
+  roleTitle?: string;
+  organization?: string;
+  regionOfOperation?: string;
+  mentorshipFormat?: string;
+  delivery?: string;
+  supportNeeded?: string;
+  feelingStretched?: string;
+  otherArea?: string;
+  yearsInLeadership?: number;
 }
 
 // Helper function to convert JSON data to a CSV string
@@ -82,23 +105,74 @@ const downloadFile = (data: string, filename: string, mimeType: string) => {
 };
 
 // --- Data Fetching Hook using TanStack Query ---
+// const useApplications = () => {
+//   return useQuery({
+//     queryKey: ["applications"],
+//     queryFn: async (): Promise<Application[]> => {
+//       const applicationsRef = collection(db, "applications");
+//       // Fetch all applications, ordered by creation date (newest first)
+//       const q = query(applicationsRef, orderBy("createdAt", "desc"));
+//       const snapshot = await getDocs(q);
+
+//       return snapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//         // Convert Firebase Timestamp to JavaScript Date if needed
+//         createdAt: doc.data().createdAt?.toDate
+//           ? doc.data().createdAt.toDate()
+//           : new Date(doc.data().createdAt),
+//       })) as Application[];
+//     },
+//     staleTime: 1000 * 60 * 2, // Data considered fresh for 2 minutes
+//   });
+// };
+
+// --- DATA FETCHING HOOK: UPDATED TO FETCH FROM TWO COLLECTIONS ---
 const useApplications = () => {
   return useQuery({
     queryKey: ["applications"],
     queryFn: async (): Promise<Application[]> => {
-      const applicationsRef = collection(db, "applications");
-      // Fetch all applications, ordered by creation date (newest first)
-      const q = query(applicationsRef, orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
+      // Define references for both new collections
+      const menteeRef = collection(db, "menteeApplications");
+      const mentorRef = collection(db, "mentorApplications");
 
-      return snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        // Convert Firebase Timestamp to JavaScript Date if needed
-        createdAt: doc.data().createdAt?.toDate
-          ? doc.data().createdAt.toDate()
-          : new Date(doc.data().createdAt),
-      })) as Application[];
+      // Fetch from both collections in parallel
+      const [menteeSnapshot, mentorSnapshot] = await Promise.all([
+        getDocs(query(menteeRef, orderBy("createdAt", "desc"))),
+        getDocs(query(mentorRef, orderBy("createdAt", "desc"))),
+      ]);
+
+      // Map and tag mentee data
+      const menteeApplications: Application[] = menteeSnapshot.docs.map(
+        (doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          type: "mentee", // Assign 'mentee' type based on collection
+          createdAt: doc.data().createdAt?.toDate
+            ? doc.data().createdAt.toDate()
+            : new Date(doc.data().createdAt),
+        })
+      ) as Application[];
+
+      // Map and tag mentor data
+      const mentorApplications: Application[] = mentorSnapshot.docs.map(
+        (doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          type: "mentor", // Assign 'mentor' type based on collection
+          createdAt: doc.data().createdAt?.toDate
+            ? doc.data().createdAt.toDate()
+            : new Date(doc.data().createdAt),
+        })
+      ) as Application[];
+
+      // Combine and sort all applications by date (newest first)
+      const allApplications = [...menteeApplications, ...mentorApplications];
+      allApplications.sort(
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      );
+
+      return allApplications;
     },
     staleTime: 1000 * 60 * 2, // Data considered fresh for 2 minutes
   });
@@ -116,10 +190,33 @@ const AdminApplications = () => {
   // New State for export loading
   const [isExporting, setIsExporting] = useState(false);
 
+  // const ALL_HEADERS = [
+  //   "areasOfInterest",
+  //   "fullName",
+  //   "email",
+  //   "cadence",
+  //   "currentChallenge",
+  //   "roleTitle",
+  //   "organization",
+  //   "regionOfOperation",
+  //   "mentorshipFormat",
+  //   "delivery",
+  //   "supportNeeded",
+  //   "feelingStretched",
+  //   "otherArea",
+  //   "yearsInLeadership",
+  // ];
+
+  // CRITICAL: Updated ALL_HEADERS with 'id', 'type', 'status', 'createdAt'
   const ALL_HEADERS = [
-    "areasOfInterest",
+    "id",
     "fullName",
     "email",
+    "type", // Added for the CSV file
+    "status", // Added for the CSV file
+    "createdAt", // Added for the CSV file
+    "areasOfInterest",
+    "areasOfExpertise",
     "cadence",
     "currentChallenge",
     "roleTitle",
@@ -254,8 +351,8 @@ const AdminApplications = () => {
                       <TableHead>Date</TableHead>
                       <TableHead>Full Name</TableHead>
                       <TableHead>Email</TableHead>
-                      {/* <TableHead>Type</TableHead> */}
-                      {/* <TableHead>Status</TableHead> */}
+                      <TableHead>Type</TableHead>
+                      <TableHead>Status</TableHead>
                       <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -279,10 +376,10 @@ const AdminApplications = () => {
                             {app.fullName}
                           </TableCell>
                           <TableCell>{app.email}</TableCell>
-                          {/* <TableCell className="capitalize">
+                          <TableCell className="capitalize">
                             {app.type}
-                          </TableCell> */}
-                          {/* <TableCell>{renderStatusBadge(app.status)}</TableCell> */}
+                          </TableCell>
+                          <TableCell>{renderStatusBadge(app.status)}</TableCell>
                           <TableCell className="text-right">
                             <Button
                               variant="ghost"
