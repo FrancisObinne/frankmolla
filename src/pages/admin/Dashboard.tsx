@@ -160,7 +160,7 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        <div className="grid gap-6 grid-cols-1">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
           <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/admin/applications")} // Renamed route to /applications
