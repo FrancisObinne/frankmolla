@@ -41,7 +41,7 @@ const Home = () => {
                   />
                 </Button>
               </Link>
-              {/* <Link to="/signup?type=mentor">
+              <Link to="/signup?type=mentor">
                 <Button
                   size="lg"
                   variant="outline"
@@ -49,7 +49,7 @@ const Home = () => {
                 >
                   Become a Mentor
                 </Button>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>
