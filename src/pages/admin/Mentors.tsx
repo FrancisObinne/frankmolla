@@ -232,7 +232,7 @@ interface Mentor {
   id: string;
   fullName: string; // Changed from full_name
   email: string;
-  areasOfInterest: string[]; // Changed from areas_of_interest
+  areasOfExpertise: string[]; // Changed from areas_of_interest
   createdAt: Date; // Changed from created_at (string) to Date
   roleTitle: string; // Changed from role_title
   organization: string;
@@ -254,7 +254,7 @@ const fetchMentors = async (): Promise<Mentor[]> => {
       // Map potential database field names to the component's interface
       fullName: data.fullName || data.full_name,
       email: data.email,
-      areasOfInterest: data.areasOfInterest || data.areas_of_interest || [],
+      areasOfExpertise: data.areasOfExpertise || data.areas_of_expertise || [],
       createdAt: data.createdAt?.toDate
         ? data.createdAt.toDate()
         : new Date(data.created_at || data.createdAt),
@@ -343,7 +343,7 @@ const Mentors = () => {
       m.email,
       m.roleTitle,
       m.organization,
-      m.areasOfInterest.join("; "),
+      m.areasOfExpertise.join("; "),
       m.createdAt.toLocaleDateString(),
     ]);
 
@@ -390,7 +390,7 @@ const Mentors = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -429,7 +429,7 @@ const Mentors = () => {
                   <TableHead>Email</TableHead>
                   <TableHead>Role</TableHead>
                   <TableHead>Organization</TableHead>
-                  <TableHead>Areas of Interest</TableHead>
+                  <TableHead>Areas of Expertise</TableHead>
                   <TableHead>Registered</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
@@ -444,7 +444,9 @@ const Mentors = () => {
                       <TableCell>{mentor.email}</TableCell>
                       <TableCell>{mentor.roleTitle}</TableCell>
                       <TableCell>{mentor.organization}</TableCell>
-                      <TableCell>{mentor.areasOfInterest.join(", ")}</TableCell>
+                      <TableCell>
+                        {mentor.areasOfExpertise.join(", ")}
+                      </TableCell>
                       <TableCell>
                         {mentor.createdAt.toLocaleDateString()}
                       </TableCell>

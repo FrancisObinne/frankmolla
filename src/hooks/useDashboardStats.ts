@@ -57,6 +57,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 interface DashboardStats {
   totalApplications: number;
   activeApplications: number;
+  activePairings: number;
   recentSignups: number; // Last 7 days
 }
 
@@ -64,6 +65,7 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
   // Define references for both new collections
   const menteeRef = collection(db, "menteeApplications");
   const mentorRef = collection(db, "mentorApplications");
+  const pairingsRef = collection(db, "mentorship_pairings");
 
   // Get the date 7 days ago for recent signups
   const sevenDaysAgo = new Date();
@@ -79,8 +81,8 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
   const totalApplications = menteeTotalSnapshot.size + mentorTotalSnapshot.size;
 
   // --- 2. Fetch Active Applications (Active Applications) ---
-  const activeMenteeQuery = query(menteeRef, where("status", "==", "active"));
-  const activeMentorQuery = query(mentorRef, where("status", "==", "active"));
+  const activeMenteeQuery = query(menteeRef, where("status", "==", "approved"));
+  const activeMentorQuery = query(mentorRef, where("status", "==", "approved"));
 
   const [menteeActiveSnapshot, mentorActiveSnapshot] = await Promise.all([
     getDocs(activeMenteeQuery),
@@ -88,6 +90,15 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
   ]);
   const activeApplications =
     menteeActiveSnapshot.size + mentorActiveSnapshot.size;
+
+  // --- 3. Fetch Active Pairings ---
+  // Assuming active pairings have status "active".
+  const activePairingsQuery = query(
+    pairingsRef
+    // where("status", "==", "active")
+  );
+  const pairingsSnapshot = await getDocs(activePairingsQuery);
+  const activePairings = pairingsSnapshot.size; // <-- IMPLEMENTED LOGIC
 
   // --- 3. Fetch Recent Signups (Last 7 Days) ---
   // NOTE: Assuming your application documents have a 'createdAt' Timestamp field.
@@ -109,6 +120,7 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
   return {
     totalApplications,
     activeApplications,
+    activePairings,
     recentSignups,
   };
 };

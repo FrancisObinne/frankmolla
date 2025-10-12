@@ -58,6 +58,7 @@ const Dashboard = () => {
   const currentStats = stats || {
     totalApplications: 0,
     activeApplications: 0,
+    activePairings: 0,
     recentSignups: 0,
   };
 
@@ -100,7 +101,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Active Applications
+                Approved Applications
               </CardTitle>
 
               <Briefcase className="h-4 w-4 text-muted-foreground" />
@@ -112,7 +113,7 @@ const Dashboard = () => {
               </div>
 
               <p className="text-xs text-muted-foreground">
-                Currently active/approved
+                Currently approved
               </p>
             </CardContent>
           </Card>
@@ -132,7 +133,8 @@ const Dashboard = () => {
 
             <CardContent>
               <div className="text-2xl font-bold">
-                {/* FIX: Use a dedicated 'pairings' stat here */}0
+                {/* FIX: Use a dedicated 'pairings' stat here */}
+                {currentStats.activePairings ? currentStats.activePairings : 0}
               </div>
 
               <p className="text-xs text-muted-foreground">Current matches</p>

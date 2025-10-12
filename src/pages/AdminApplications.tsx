@@ -52,6 +52,9 @@ interface Application {
   yearsInLeadership?: number;
 }
 
+const PAGE_SIZE = 10;
+const ORDER_BY_FIELD = "createdAt";
+
 // Helper function to convert JSON data to a CSV string
 const convertToCSV = (data: any[], headers: string[]): string => {
   // 1. Create the header row
@@ -179,6 +182,8 @@ const useApplications = () => {
 };
 
 const AdminApplications = () => {
+  const [page, setPage] = useState(0); // 0-indexed page number
+  const [filterStatus, setFilterStatus] = useState<string>("pending");
   const { loading: authLoading, isAdmin } = useAdminAuth();
   const {
     data: applications,

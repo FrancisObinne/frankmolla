@@ -643,7 +643,7 @@ const Pairings = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -710,8 +710,8 @@ const Pairings = () => {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label>Status</Label>
-                    <Select
+                    {/* <Label>Status</Label> */}
+                    {/* <Select
                       value={newPairing.status}
                       onValueChange={(value) =>
                         setNewPairing({
@@ -729,7 +729,7 @@ const Pairings = () => {
                         <SelectItem value="completed">Completed</SelectItem>
                         <SelectItem value="cancelled">Cancelled</SelectItem>
                       </SelectContent>
-                    </Select>
+                    </Select> */}
                   </div>
                   <div className="space-y-2">
                     <Label>Notes (Optional)</Label>
@@ -777,7 +777,7 @@ const Pairings = () => {
                 <TableRow>
                   <TableHead>Mentor</TableHead>
                   <TableHead>Mentee</TableHead>
-                  <TableHead>Status</TableHead>
+                  {/* <TableHead>Status</TableHead> */}
                   <TableHead>Notes</TableHead>
                   <TableHead>Created</TableHead>
                   <TableHead>Actions</TableHead>
@@ -791,7 +791,7 @@ const Pairings = () => {
                         {getMentorName(pairing.mentorId)}
                       </TableCell>
                       <TableCell>{getMenteeName(pairing.menteeId)}</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getStatusBadge(
                             pairing.status
@@ -799,7 +799,7 @@ const Pairings = () => {
                         >
                           {pairing.status}
                         </span>
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell className="max-w-xs truncate">
                         {pairing.notes || "-"}
                       </TableCell>
