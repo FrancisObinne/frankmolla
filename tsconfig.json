@@ -1,6 +1,5 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "files": ["src/jest-setup.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
