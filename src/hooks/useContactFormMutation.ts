@@ -172,7 +172,7 @@ interface ContactMessage {
 }
 
 // Target email for the admin to receive the contact form submission
-const ADMIN_EMAIL = "obinne.francis@gmail.com";
+const ADMIN_EMAIL = "admin@frankmolla.com";
 
 const submitMessage = async (data: ContactMessage) => {
   const mailCollection = collection(db, "mail");

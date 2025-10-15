@@ -127,7 +127,7 @@ interface ApplicationPayload {
   payload: MenteeFormValues | MentorFormValues;
 }
 
-const ADMIN_EMAIL = "obinne.francis@gmail.com";
+const ADMIN_EMAIL = "admin@frankmolla.com";
 
 export const useSignUp = (
   options?: UseMutationOptions<void, Error, ApplicationPayload>
