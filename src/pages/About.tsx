@@ -24,6 +24,18 @@ const About = () => {
         </div>
       </section>
 
+      {/* NEW SECTION: Frank's Image before Story Section */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <img
+            src={frankAboutImage} // Use the imported image
+            alt="Frank Molla leading a discussion"
+            className="w-full h-80 object-cover rounded-lg shadow-xl border-4 border-primary/20"
+          />
+        </div>
+      </section>
+      {/* END NEW SECTION */}
+
       {/* Story Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
