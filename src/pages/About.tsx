@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Eye, Award } from "lucide-react";
+import frankAboutImage from "@/assets/frank_molla_about_me.jpg".
 
 const About = () => {
   return (
