@@ -71,7 +71,7 @@ const Home = () => {
           </div>
 
           {/* NEW SECTION: Frank's Image after Why FrankMolla Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-primary/5 to-primary/10">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <img
             src={frankImage} // Use the imported image
