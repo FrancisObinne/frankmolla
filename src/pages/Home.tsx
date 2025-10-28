@@ -70,6 +70,18 @@ const Home = () => {
             </p>
           </div>
 
+          {/* NEW SECTION: Frank's Image after Why FrankMolla Section */}
+      <section className="py-12 md:py-16 bg-gradient-to-r from-primary/5 to-primary/10">
+        <div className="container mx-auto px-4">
+          <img
+            src={frankImage} // Use the imported image
+            alt="Frank Molla inspiring others"
+            className="w-full h-80 object-cover rounded-lg shadow-xl border-4 border-primary/20"
+          />
+        </div>
+      </section>
+      {/* END NEW SECTION */}
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -109,19 +121,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* NEW SECTION: Frank's Image after Why FrankMolla Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-primary/5 to-primary/10">
-        <div className="container mx-auto px-4">
-          <img
-            src={frankImage} // Use the imported image
-            alt="Frank Molla inspiring others"
-            className="w-full h-80 object-cover rounded-lg shadow-xl border-4 border-primary/20"
-          />
-        </div>
-      </section>
-      {/* END NEW SECTION */}
+      </section> 
 
       {/* Frank Moll Profile Section - NEW SECTION */}
       <section className="py-20 bg-muted">
