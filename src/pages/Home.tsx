@@ -60,7 +60,7 @@ const Home = () => {
       {/* Why FrankMolla Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in bg-muted">
             <h2 className="text-3xl md:text-4xl font-bold text-text-heading mb-4">
               Why Choose FrankMolla?
             </h2>
