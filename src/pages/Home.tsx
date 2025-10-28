@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-mentorship-2.jpg";
 import mentor_2 from "@/assets/mentor_2.jpg";
+import frankImage from "@/assets/frank_molla_mid_section.jpg";
 
 const Home = () => {
   return (
@@ -109,6 +110,18 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* NEW SECTION: Frank's Image after Why FrankMolla Section */}
+      <section className="py-12 md:py-16 bg-gradient-to-r from-primary/5 to-primary/10">
+        <div className="container mx-auto px-4">
+          <img
+            src={frankImage} // Use the imported image
+            alt="Frank Molla inspiring others"
+            className="w-full h-80 object-cover rounded-lg shadow-xl border-4 border-primary/20"
+          />
+        </div>
+      </section>
+      {/* END NEW SECTION */}
 
       {/* Frank Moll Profile Section - NEW SECTION */}
       <section className="py-20 bg-muted">
