@@ -14,7 +14,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              About FrankMolla
+              About Rafikiz Mentorship
             </h1>
             <p className="text-xl text-primary-foreground/90">
               Building bridges between experience and aspiration, one meaningful
@@ -51,7 +51,7 @@ const About = () => {
                 relationships
               </p>
               <p>
-                {/* FrankMolla was founded with a simple yet powerful belief: that
+                {/* Rafikiz Mentorship  was founded with a simple yet powerful belief: that
                 everyone deserves access to guidance from those who have walked
                 the path before them. We recognized that while talent and
                 ambition are abundant, meaningful mentorship opportunities are
@@ -70,7 +70,7 @@ const About = () => {
                 breakthroughs. */}
               </p>
               <p>
-                {/* Today, FrankMolla stands as a testament to the power of human
+                {/* Today, Rafikiz Mentorship  stands as a testament to the power of human
                 connection and the transformative impact of sharing knowledge,
                 experience, and wisdom across generations and industries. */}
               </p>
@@ -160,7 +160,7 @@ const About = () => {
               Our Commitment
             </h2>
             <p className="text-text-body text-lg mb-8">
-              At FrankMolla, we're more than just a platform—we're a community
+              At Rafikiz Mentorship, we're more than just a platform—we're a community
               dedicated to fostering growth, learning, and meaningful
               relationships. Every day, our team works tirelessly to ensure that
               our mentors and mentees have the best possible experience.
