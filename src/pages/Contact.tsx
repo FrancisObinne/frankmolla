@@ -96,7 +96,7 @@ const Contact = () => {
                 {
                   icon: Mail,
                   title: "Email Us",
-                  description: "contact@frankmolla.com",
+                  description: "contact@rafikizmentorship.com",
                   color: "text-primary",
                 },
                 {
@@ -223,7 +223,7 @@ const Contact = () => {
                   //     "Our algorithm matches you based on goals, interests, experience, and availability to ensure the best mentorship fit.",
                   // },
                   {
-                    question: "Is FrankMolla free?",
+                    question: "Is Rafikiz Mentorship free?",
                     answer:
                       "We offer both free and premium membership options. Basic mentorship connections are always free.",
                   },
