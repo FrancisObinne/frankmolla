@@ -655,7 +655,7 @@ const SignUp = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Join FrankMolla
+              Join Rafikiz Mentorship
             </h1>
             <p className="text-xl text-primary-foreground/90">
               Start your mentorship journey today. Connect, learn, and grow.
