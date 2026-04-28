@@ -131,7 +131,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-text-light text-sm">
-            © {new Date().getFullYear()} FrankMolla. All rights reserved.
+            © {new Date().getFullYear()} Rafikiz Mentorship. All rights reserved.
           </p>
         </div>
       </div>
