@@ -62,7 +62,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold text-text-heading mb-4">
-              Why Choose FrankMolla?
+              Why Choose Rafikiz Mentorship?
             </h2>
             <p className="text-text-body max-w-2xl mx-auto">
               We're committed to creating meaningful connections that foster
@@ -147,18 +147,18 @@ const Home = () => {
                 A Note from the Founder
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-text-heading mb-4">
-                Meet Frank Molla
+                Meet Rafikiz Mentorship
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-text-body mb-3 sm:mb-4 italic leading-relaxed px-3 sm:px-0 text-center sm:text-left">
-                "Every great journey starts with a guide. FrankMolla is built on
+                "Every great journey starts with a guide. Rafikiz Mentorship is built on
                 the belief that a single, meaningful connection can unlock
                 extraordinary potential."
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-text-body mb-3 sm:mb-4 leading-relaxed px-3 sm:px-0 text-justify sm:text-left">
-                Frank Molla is a renowned entrepreneur and lifelong advocate for
+                Rafikiz Mentorship is a renowned and lifelong advocate for
                 structured personal development. Having navigated the challenges
-                of a competitive landscape, he founded FrankMolla to democratize
+                of a competitive landscape, Rafikiz Mentorship was founded to democratize
                 access to world-class mentorship. His vision is a platform where
                 the 'Quietly Bold'—those with ambition but perhaps lacking a
                 clear path—can find the guidance to realize their full
@@ -166,7 +166,7 @@ const Home = () => {
               </p>
 
               <p className="text-text-body font-semibold">
-                — Frank Molla, Founder & CEO
+                — Rafikiz Mentorship
               </p>
             </div>
           </div>
@@ -181,7 +181,7 @@ const Home = () => {
             Ready to Start Your Journey?
           </h2>
           <p className="text-text-body mb-8 max-w-2xl mx-auto">
-            Whether you're looking to grow or share your expertise, FrankMolla
+            Whether you're looking to grow or share your expertise, Rafikiz Mentorship
             is here to connect you with the right people.
           </p>
           <Link to="/signup">
