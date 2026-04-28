@@ -12,7 +12,7 @@ const Testimonials = () => {
       role: "Software Engineer",
       program: "Career Development",
       image: "SJ",
-      quote: "FrankMolla connected me with an amazing mentor who helped me transition from junior to senior engineer in just 18 months. The guidance I received was invaluable.",
+      quote: "Rafikiz Mentorship connected me with an amazing mentor who helped me transition from junior to senior engineer in just 18 months. The guidance I received was invaluable.",
       rating: 5
     },
     {
