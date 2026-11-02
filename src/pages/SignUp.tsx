@@ -683,7 +683,7 @@ const SignUp = () => {
                   <div className="text-xs opacity-80">I want guidance</div>{" "}
                 </div>{" "}
               </Button>
-              <Button
+              {/* <Button
                 type="button"
                 variant={userType === "mentor" ? "default" : "outline"}
                 onClick={() => setUserType("mentor")}
@@ -699,7 +699,7 @@ const SignUp = () => {
                     I want to help others{" "}
                   </div>{" "}
                 </div>{" "}
-              </Button>
+              </Button> */}
             </div>
 
             <Card className="border-border">
