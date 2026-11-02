@@ -240,20 +240,19 @@ import heroImage from "@/assets/hero-mentorship-2.jpg";
 import mentor_2 from "@/assets/mentor_2.jpg";
 import frankImage from "@/assets/frank_molla_mid_section.jpg";
 
-// Newly uploaded gallery images for Home (gallery_1 to gallery_6)
+// Newly uploaded gallery images for Home (gallery_1 to gallery_5)
 import gallery1 from "@/assets/gallery_1.jpg";
 import gallery2 from "@/assets/gallery_2.jpg";
 import gallery3 from "@/assets/gallery_3.jpg";
 import gallery4 from "@/assets/gallery_4.jpg";
 import gallery5 from "@/assets/gallery_5.jpg";
-import gallery6 from "@/assets/gallery_6.jpg";
 
 const Home = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAFAFA] selection:bg-primary/20">
       <Navigation />
 
-      {/* --- HERO SECTION: Modern Split Layout (UNCHANGED ARRANGEMENT) --- */}
+      {/* --- HERO SECTION: Modern Split Layout --- */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20 md:pt-0">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 hidden lg:block -skew-x-12 translate-x-20" />
         
@@ -308,7 +307,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- WHY CHOOSE SECTION: Bento Grid Style (UNCHANGED ARRANGEMENT) --- */}
+      {/* --- WHY CHOOSE SECTION: Bento Grid Style --- */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mb-20 text-center lg:text-left">
@@ -363,7 +362,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- FEATURED WIDE IMAGE SECTION (UNCHANGED ARRANGEMENT) --- */}
+      {/* --- FEATURED WIDE IMAGE SECTION --- */}
       <section className="pb-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="relative group overflow-hidden rounded-[3rem] shadow-2xl">
@@ -381,7 +380,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- STUNNING NEW IMMERSIVE GALLERY SHOWCASE (Using gallery_1 to gallery_6 with object-top fix) --- */}
+      {/* --- 5-IMAGE BENTO GALLERY SHOWCASE (gallery_1 to gallery_5) --- */}
       <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
         
@@ -401,10 +400,10 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Asymmetrical Bento Gallery Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[240px]">
-            {/* Item 1: Large Featured Card */}
-            <div className="md:col-span-2 lg:col-span-2 row-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl">
+          {/* 5-Item Asymmetric Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[260px]">
+            {/* Gallery 1: Featured Large Card (Spans 2 cols, 2 rows) */}
+            <div className="md:col-span-2 row-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl">
               <img
                 src={gallery1}
                 alt="Mentorship session highlight 1"
@@ -417,7 +416,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Item 2 */}
+            {/* Gallery 2 */}
             <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
               <img
                 src={gallery2}
@@ -429,7 +428,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Item 3 */}
+            {/* Gallery 3 */}
             <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
               <img
                 src={gallery3}
@@ -441,7 +440,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Item 4 */}
+            {/* Gallery 4 */}
             <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
               <img
                 src={gallery4}
@@ -453,35 +452,23 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Item 5 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+            {/* Gallery 5 (Spans 2 columns on desktop) */}
+            <div className="md:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
               <img
                 src={gallery5}
                 alt="Mentorship session highlight 5"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <p className="text-sm font-semibold text-white">Community & Growth</p>
-              </div>
-            </div>
-
-            {/* Item 6: Wide Card */}
-            <div className="md:col-span-2 lg:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
-              <img
-                src={gallery6}
-                alt="Mentorship session highlight 6"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-sm font-bold text-white">Building Legacies That Last</p>
+                <p className="text-sm font-bold text-white">Community & Growth</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- FOUNDER PROFILE SECTION: Editorial Layout (UNCHANGED ARRANGEMENT) --- */}
+      {/* --- FOUNDER PROFILE SECTION: Editorial Layout --- */}
       <section className="py-24 bg-slate-50 border-y border-slate-200">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-12 gap-12 items-center">
@@ -530,7 +517,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- CTA SECTION: Bold Gradient (UNCHANGED ARRANGEMENT) --- */}
+      {/* --- CTA SECTION: Bold Gradient --- */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900" />
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary opacity-20 blur-[100px]" />
@@ -558,4 +545,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;                
