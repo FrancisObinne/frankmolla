@@ -480,7 +480,7 @@ const Home = () => {
             </div>
 
             {/* Gallery 5: Wide Bottom Banner */}
-            <div className="lg:col-span-3 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[300px]">
+            {/* <div className="lg:col-span-3 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[300px]">
               <img
                 src={gallery5}
                 alt="Mentorship session highlight 5"
@@ -494,7 +494,7 @@ const Home = () => {
                 </div>
                 <p className="text-slate-300 text-sm max-w-xs">Connecting ambition with timeless wisdom for sustainable success.</p>
               </div>
-            </div>
+            </div> */}
 
           </div>
         </div>
