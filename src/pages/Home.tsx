@@ -275,15 +275,15 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Link to="/signup?type=mentee">
                 <Button size="lg" className="h-14 px-10 text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all rounded-full">
-                  Find a Mentor
+                  Connect to Rafiki
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
               </Link>
-              <Link to="/signup?type=mentor">
+              {/* <Link to="/signup?type=mentor">
                 <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2 rounded-full hover:bg-white transition-all shadow-sm">
                   Become a Mentor
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
