@@ -316,9 +316,9 @@ const Home = () => {
               <img
                 src={heroImage}
                 alt="Mentorship"
-                className="w-full h-[420px] sm:h-[520px] lg:h-[580px] object-cover object-top filter brightness-[0.98] contrast-[1.02]"
+                className="w-full h-[420px] sm:h-[520px] lg:h-[580px] object-cover object-top filter brightness-[0.98] contrast-[1.02] rounded-[2rem]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent pointer-events-none" />
             </div>
             
             {/* Floating Verified Badge */}
@@ -401,9 +401,9 @@ const Home = () => {
             <img
               src={frankImage}
               alt="Community interaction"
-              className="w-full h-[480px] sm:h-[550px] object-cover object-top filter brightness-[0.95] transition-transform duration-1000 group-hover:scale-105"
+              className="w-full h-[480px] sm:h-[550px] object-cover object-top filter brightness-[0.95] rounded-[2.8rem] transition-transform duration-1000 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent pointer-events-none" />
             
             <div className="absolute bottom-10 left-8 sm:left-12 right-8 sm:right-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="space-y-2">
@@ -420,7 +420,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- GALLERY SECTION (Curvy Rounded Borders on Cards & Images) --- */}
+      {/* --- GALLERY SECTION (Custom Rounded Image Edges) --- */}
       <section className="py-28 bg-slate-100/70 border-t border-slate-200/80 relative overflow-hidden">
         {/* Light Glow background effects */}
         <div className="absolute top-1/3 left-1/5 w-[550px] h-[550px] bg-primary/5 blur-[170px] rounded-full pointer-events-none" />
@@ -441,7 +441,7 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Clean 3-Column Uniform Grid with curvy rounded borders */}
+          {/* Clean 3-Column Uniform Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { img: gallery1, title: "Transforming Ambition into Action", tag: "Live Workshop" },
@@ -455,7 +455,7 @@ const Home = () => {
                 key={idx} 
                 className="group relative bg-white border border-slate-200/90 rounded-[2.4rem] p-4 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Image Container with curvy rounded corners (`rounded-[1.8rem]`) */}
+                {/* Image Container */}
                 <div className="relative w-full h-[280px] bg-slate-50 rounded-[1.8rem] overflow-hidden flex items-center justify-center p-2 border border-slate-100">
                   <img
                     src={item.img}
