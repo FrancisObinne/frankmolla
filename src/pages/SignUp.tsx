@@ -668,7 +668,8 @@ const SignUp = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             {/* User Type Selector (no changes needed here) */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            {/* <div className="grid grid-cols-2 gap-4 mb-8"> */}
+            <div className="grid grid-cols-1 gap-4 mb-8">
               <Button
                 type="button"
                 variant={userType === "mentee" ? "default" : "outline"}
