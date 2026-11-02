@@ -381,7 +381,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- STUNNING CINEMATIC MASONRY GALLERY (gallery_1 to gallery_6) --- */}
+      {/* --- STUNNING CINEMATIC GALLERY WITH PERFECTED FRAMING --- */}
       <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
         {/* Glow effects */}
         <div className="absolute top-1/3 left-1/5 w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
@@ -403,11 +403,11 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Cinematic Asymmetric Grid Layout */}
+          {/* Optimized Grid Layout for Vertical/Portrait Photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* Gallery 1: Cinematic Landscape */}
-            <div className="lg:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl aspect-[16/10]">
+            {/* Gallery 1 */}
+            <div className="lg:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[380px]">
               <img
                 src={gallery1}
                 alt="Mentorship session highlight 1"
@@ -420,8 +420,22 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Gallery 2: Portrait Frame */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl aspect-[4/5] lg:aspect-auto lg:h-full">
+            {/* Gallery 6: Dedicated Tall Slot so head and full upper body show clearly */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[380px]">
+              <img
+                src={gallery6}
+                alt="Mentorship session highlight 6"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <span className="text-xs font-semibold text-primary uppercase tracking-wider">Legacy</span>
+                <p className="text-xl font-bold text-white mt-1">Building Legacies That Last</p>
+              </div>
+            </div>
+
+            {/* Gallery 2 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
               <img
                 src={gallery2}
                 alt="Mentorship session highlight 2"
@@ -435,8 +449,8 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Gallery 3: Portrait Frame */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl aspect-[4/5]">
+            {/* Gallery 3 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
               <img
                 src={gallery3}
                 alt="Mentorship session highlight 3"
@@ -450,8 +464,8 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Gallery 4: Square Frame */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl aspect-square">
+            {/* Gallery 4 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
               <img
                 src={gallery4}
                 alt="Mentorship session highlight 4"
@@ -465,33 +479,18 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Gallery 5: Cinematic Landscape */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl aspect-square lg:aspect-auto lg:h-full">
+            {/* Gallery 5: Wide Bottom Banner */}
+            <div className="lg:col-span-3 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[300px]">
               <img
                 src={gallery5}
                 alt="Mentorship session highlight 5"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                <div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">Community</span>
-                  <p className="text-lg font-bold text-white mt-1">Shared Growth & Connection</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Gallery 6: Wide Full-Span Feature Card */}
-            <div className="lg:col-span-3 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl aspect-[21/9]">
-              <img
-                src={gallery6}
-                alt="Mentorship session highlight 6"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-80" />
               <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/20 px-3 py-1 rounded-full border border-primary/30">Legacy</span>
-                  <h4 className="text-2xl font-bold text-white mt-3">Building Legacies That Last</h4>
+                  <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/20 px-3 py-1 rounded-full border border-primary/30">Community</span>
+                  <h4 className="text-2xl font-bold text-white mt-3">Shared Growth & Connection</h4>
                 </div>
                 <p className="text-slate-300 text-sm max-w-xs">Connecting ambition with timeless wisdom for sustainable success.</p>
               </div>
