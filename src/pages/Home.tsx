@@ -279,11 +279,6 @@ const Home = () => {
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
               </Link>
-              {/* <Link to="/signup?type=mentor">
-                <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2 rounded-full hover:bg-white transition-all shadow-sm">
-                  Become a Mentor
-                </Button>
-              </Link> */}
             </div>
           </div>
 
@@ -293,7 +288,7 @@ const Home = () => {
               <img
                 src={heroImage}
                 alt="Mentorship"
-                className="w-full h-[400px] md:h-[600px] object-cover"
+                className="w-full h-[400px] md:h-[600px] object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
@@ -375,7 +370,7 @@ const Home = () => {
             <img
               src={frankImage}
               alt="Community interaction"
-              className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
+              className="w-full h-[450px] object-cover object-top transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all" />
             <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-6">
@@ -386,9 +381,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- DRASTICALLY STUNNING NEW IMMERSIVE GALLERY SHOWCASE (Using gallery_1 to gallery_6) --- */}
+      {/* --- STUNNING NEW IMMERSIVE GALLERY SHOWCASE (Using gallery_1 to gallery_6 with object-top fix) --- */}
       <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
-        {/* Ambient background lighting */}
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-6 relative z-10">
@@ -414,7 +408,7 @@ const Home = () => {
               <img
                 src={gallery1}
                 alt="Mentorship session highlight 1"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
               <div className="absolute bottom-8 left-8 right-8">
@@ -428,7 +422,7 @@ const Home = () => {
               <img
                 src={gallery2}
                 alt="Mentorship session highlight 2"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                 <p className="text-sm font-semibold text-white">Meaningful Dialogues</p>
@@ -440,7 +434,7 @@ const Home = () => {
               <img
                 src={gallery3}
                 alt="Mentorship session highlight 3"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                 <p className="text-sm font-semibold text-white">One-on-One Guidance</p>
@@ -452,7 +446,7 @@ const Home = () => {
               <img
                 src={gallery4}
                 alt="Mentorship session highlight 4"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                 <p className="text-sm font-semibold text-white">Focused Breakthroughs</p>
@@ -464,7 +458,7 @@ const Home = () => {
               <img
                 src={gallery5}
                 alt="Mentorship session highlight 5"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                 <p className="text-sm font-semibold text-white">Community & Growth</p>
@@ -476,7 +470,7 @@ const Home = () => {
               <img
                 src={gallery6}
                 alt="Mentorship session highlight 6"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6">
@@ -498,7 +492,7 @@ const Home = () => {
                 <img
                   src={mentor_2}
                   alt="Founder"
-                  className="w-full h-auto aspect-[4/5] object-cover rounded-[2rem]"
+                  className="w-full h-auto aspect-[4/5] object-cover object-top rounded-[2rem]"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-primary p-6 rounded-3xl shadow-xl border-[6px] border-slate-50">
                   <Quote className="text-white fill-current" size={32} />
@@ -564,4 +558,4 @@ const Home = () => {
   );
 };
 
-export default Home;           
+export default Home;
