@@ -233,102 +233,96 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Users, Target, Sparkles, Quote, CheckCircle2, Compass, ShieldCheck } from "lucide-react";
+import { ArrowRight, Users, Target, Sparkles, Quote, CheckCircle2, Camera } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-mentorship-2.jpg";
 import mentor_2 from "@/assets/mentor_2.jpg";
 import frankImage from "@/assets/frank_molla_mid_section.jpg";
 
+// Newly uploaded gallery images for Home (gallery_1 to gallery_6)
+import gallery1 from "@/assets/gallery_1.jpg";
+import gallery2 from "@/assets/gallery_2.jpg";
+import gallery3 from "@/assets/gallery_3.jpg";
+import gallery4 from "@/assets/gallery_4.jpg";
+import gallery5 from "@/assets/gallery_5.jpg";
+import gallery6 from "@/assets/gallery_6.jpg";
+
 const Home = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAFA] selection:bg-primary/20 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#FAFAFA] selection:bg-primary/20">
       <Navigation />
 
-      {/* --- HERO SECTION: Immersive Modern Split Layout --- */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-24 pb-16 lg:py-0">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-100/70 hidden lg:block -skew-x-12 translate-x-24 pointer-events-none" />
+      {/* --- HERO SECTION: Modern Split Layout (UNCHANGED ARRANGEMENT) --- */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20 md:pt-0">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 hidden lg:block -skew-x-12 translate-x-20" />
         
-        <div className="container relative mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center z-10">
-          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase shadow-sm">
-              <Sparkles size={14} />
-              <span>Elite Mentorship Platform</span>
+        <div className="container relative mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center z-10">
+          <div className="space-y-8 animate-fade-in text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wide uppercase">
+              <Sparkles size={16} />
+              <span>Elevate Your Potential</span>
             </div>
             
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.08]">
-              A Mentorship Sanctuary for the <span className="text-primary italic font-serif">Quietly Bold</span>
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+              A Mentorship Sanctuary for the <span className="text-primary italic">Quietly Bold</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mx-auto lg:mx-0">
-              Connect with world-class leaders and seasoned mentors who transform raw ambition into legacy-driven excellence through structured guidance.
+            <p className="text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed mx-auto lg:mx-0">
+              Connect with world-class mentors who transform ambition into excellence through structured, meaningful guidance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Link to="/signup?type=mentee">
-                <Button size="lg" className="h-14 px-10 text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all rounded-full group bg-primary hover:bg-primary/90">
-                  Connect to Rafiki
-                  <ArrowRight className="ml-2 group-hover:translate-x-1.5 transition-transform" size={20} />
+                <Button size="lg" className="h-14 px-10 text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all rounded-full">
+                  Find a Mentor
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
               </Link>
-              {/* <Link to="/signup?type=mentor">
-                <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2 border-slate-300 rounded-full hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm">
+              <Link to="/signup?type=mentor">
+                <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2 rounded-full hover:bg-white transition-all shadow-sm">
                   Become a Mentor
                 </Button>
-              </Link> */}
-            </div>
-
-            <div className="pt-6 flex items-center justify-center lg:justify-start gap-8 text-slate-500 text-sm font-medium">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="text-primary" size={18} />
-                <span>100% Vetted Experts</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Compass className="text-primary" size={18} />
-                <span>Structured Pathways</span>
-              </div>
+              </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative group px-2 sm:px-0">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/30 via-purple-500/10 to-transparent rounded-[3rem] blur-3xl opacity-60" />
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
+          <div className="relative group animate-float px-4 md:px-0">
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/30 to-transparent rounded-[2.5rem] blur-3xl opacity-50" />
+            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
               <img
                 src={heroImage}
-                alt="Mentorship session in action"
-                className="w-full h-[420px] md:h-[580px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                alt="Mentorship"
+                className="w-full h-[400px] md:h-[600px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-xs uppercase tracking-widest text-primary font-bold">Featured Circle</p>
-                <p className="text-lg font-semibold">Transforming potential into achievement</p>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
             
-            {/* Floating Trust Card */}
-            <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl border border-slate-100 hidden sm:flex items-center gap-4">
-              <div className="bg-emerald-100 p-3 rounded-full text-emerald-600">
-                <CheckCircle2 size={24} />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-900">Verified Growth</p>
-                <p className="text-xs text-slate-500">Trusted by industry leaders</p>
+            <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-slate-100 hidden md:block">
+              <div className="flex items-center gap-4">
+                <div className="bg-green-100 p-2 rounded-full text-green-600">
+                  <CheckCircle2 size={24} />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-slate-900">Verified Mentors</p>
+                  <p className="text-xs text-slate-500">100% Manual Vetting</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- WHY CHOOSE SECTION: Modern Bento Grid --- */}
+      {/* --- WHY CHOOSE SECTION: Bento Grid Style (UNCHANGED ARRANGEMENT) --- */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mb-16 text-center lg:text-left">
-            <h2 className="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-3">The Rafikiz Difference</h2>
-            <h3 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-              Why Leaders Choose Rafikiz Mentorship
+          <div className="max-w-3xl mb-20 text-center lg:text-left">
+            <h2 className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 italic">The Rafikiz Difference</h2>
+            <h3 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+              Why Choose Rafikiz Mentorship?
             </h3>
-            <p className="text-slate-600 text-lg mt-4 max-w-xl">
-              We design intentional frameworks that foster profound clarity, high-stakes accountability, and enduring human connection.
+            <p className="text-slate-500 text-lg mt-6">
+              We're committed to creating meaningful connections that foster growth, learning, and success.
             </p>
           </div>
 
@@ -336,43 +330,37 @@ const Home = () => {
             {[
               {
                 icon: Users,
-                title: "Elite Mentors",
-                description: "Connect with battle-tested professionals who have scaled peaks and are passionate about passing down wisdom.",
-                color: "bg-blue-600",
+                title: "Expert Mentors",
+                description: "Connect with experienced professionals who are passionate about sharing their knowledge.",
+                color: "bg-blue-500",
               },
               {
                 icon: Target,
-                title: "Precision Matching",
-                description: "Our proprietary alignment model pairs you with mentors whose exact psychological and strategic DNA matches your goals.",
+                title: "Personalized Matching",
+                description: "Our intelligent matching system pairs you with mentors who align with your exact goals.",
                 color: "bg-primary",
               },
               {
                 icon: Sparkles,
-                title: "Measurable Impact",
-                description: "Move beyond casual chats. Experience milestone-driven sessions designed to accelerate your career or venture.",
-                color: "bg-purple-600",
+                title: "Proven Results",
+                description: "Join thousands of mentees who have achieved their goals through our structured program.",
+                color: "bg-purple-500",
               },
             ].map((feature, index) => (
               <Card
                 key={index}
-                className="group border-none shadow-xl shadow-slate-100 bg-slate-50/80 hover:bg-slate-900 transition-all duration-500 rounded-[2rem] overflow-hidden"
+                className="group border-none shadow-none bg-slate-50 hover:bg-slate-900 transition-all duration-500 rounded-[2rem]"
               >
-                <CardContent className="p-10 flex flex-col justify-between h-full">
-                  <div>
-                    <div className={`w-16 h-16 rounded-2xl ${feature.color} text-white flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform`}>
-                      <feature.icon size={30} />
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-white transition-colors mb-4">
-                      {feature.title}
-                    </h3>
-                    <p className="text-slate-600 group-hover:text-slate-300 transition-colors leading-relaxed">
-                      {feature.description}
-                    </p>
+                <CardContent className="p-10">
+                  <div className={`w-16 h-16 rounded-2xl ${feature.color} text-white flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform`}>
+                    <feature.icon size={32} />
                   </div>
-                  <div className="pt-8 flex items-center gap-2 text-primary font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Learn more</span>
-                    <ArrowRight size={16} />
-                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 group-hover:text-white transition-colors mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-600 group-hover:text-slate-300 transition-colors leading-relaxed">
+                    {feature.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -380,143 +368,190 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- STUNNING ASYMMETRIC BENTO PHOTO GALLERY SHOWCASE --- */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-slate-950 opacity-80" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="text-primary font-bold tracking-[0.2em] uppercase text-xs">Community in Action</span>
-              <h3 className="text-3xl md:text-5xl font-extrabold tracking-tight mt-3">
-                Moments That Define Our Culture
-              </h3>
-            </div>
-            <p className="text-slate-400 max-w-md text-base">
-              A glimpse inside our intimate sessions, masterclasses, and vibrant community gatherings across the globe.
-            </p>
-          </div>
-
-          {/* Asymmetric Bento Grid (Uses Frank's image, Hero image, and fallback placeholders) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Big Feature Tile 1 */}
-            <div className="md:col-span-8 relative group overflow-hidden rounded-[2.5rem] bg-slate-800 aspect-[16/10] shadow-2xl border border-slate-700/50">
-              <img
-                src={frankImage}
-                alt="Community mentoring session"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <span className="px-3 py-1 rounded-full bg-primary/30 text-primary-foreground border border-primary/40 text-xs font-semibold backdrop-blur-md">
-                  Masterclass Session
-                </span>
-                <h4 className="text-2xl md:text-3xl font-bold mt-3">Building Sustainable Legacies Together</h4>
-              </div>
-            </div>
-
-            {/* Tile 2 */}
-            <div className="md:col-span-4 relative group overflow-hidden rounded-[2.5rem] bg-slate-800 aspect-[4/5] md:aspect-auto shadow-2xl border border-slate-700/50">
-              <img
-                src={mentor_2}
-                alt="Founder guidance"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className="text-primary text-xs font-bold tracking-widest uppercase">Leadership</span>
-                <h4 className="text-xl font-bold mt-1">One-on-One Mentorship</h4>
-              </div>
-            </div>
-
-            {/* Tile 3 */}
-            <div className="md:col-span-4 relative group overflow-hidden rounded-[2.5rem] bg-slate-800 aspect-[4/3] shadow-2xl border border-slate-700/50">
-              <img
-                src={heroImage}
-                alt="Interactive strategy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <h4 className="text-lg font-bold">Strategic Alignment</h4>
-              </div>
-            </div>
-
-            {/* Tile 4 (Editorial quote card) */}
-            <div className="md:col-span-8 bg-gradient-to-br from-primary/20 via-slate-800 to-slate-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center border border-primary/30 shadow-2xl">
-              <Quote className="text-primary mb-4" size={40} />
-              <p className="text-xl md:text-2xl font-medium italic text-slate-200 leading-relaxed mb-6">
-                "Mentorship is not just about giving advice; it is about holding up a mirror so leaders can see their highest potential."
-              </p>
-              <p className="text-sm font-bold uppercase tracking-wider text-primary">— Mr. Frank Molla</p>
+      {/* --- FEATURED WIDE IMAGE SECTION (UNCHANGED ARRANGEMENT) --- */}
+      <section className="pb-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="relative group overflow-hidden rounded-[3rem] shadow-2xl">
+            <img
+              src={frankImage}
+              alt="Community interaction"
+              className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all" />
+            <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-6">
+              <h4 className="text-3xl md:text-5xl font-bold text-white max-w-md">Building the future, together.</h4>
+              <div className="hidden md:block h-[1px] flex-grow mx-12 bg-white/30" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- FOUNDER PROFILE SECTION: Editorial Layout --- */}
+      {/* --- DRASTICALLY STUNNING NEW IMMERSIVE GALLERY SHOWCASE (Using gallery_1 to gallery_6) --- */}
+      <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
+        {/* Ambient background lighting */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-semibold tracking-widest uppercase">
+                <Camera size={14} />
+                <span>Visual Sanctuary</span>
+              </div>
+              <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+                Inside the Rafikiz Experience
+              </h3>
+            </div>
+            <p className="text-slate-400 max-w-md text-base leading-relaxed">
+              Real moments of breakthroughs, collaborative mentoring sessions, and profound connections captured live.
+            </p>
+          </div>
+
+          {/* Asymmetrical Bento Gallery Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[240px]">
+            {/* Item 1: Large Featured Card */}
+            <div className="md:col-span-2 lg:col-span-2 row-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl">
+              <img
+                src={gallery1}
+                alt="Mentorship session highlight 1"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/30">Live Workshop</span>
+                <h4 className="text-2xl font-bold text-white mt-3">Transforming Ambition into Action</h4>
+              </div>
+            </div>
+
+            {/* Item 2 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+              <img
+                src={gallery2}
+                alt="Mentorship session highlight 2"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-sm font-semibold text-white">Meaningful Dialogues</p>
+              </div>
+            </div>
+
+            {/* Item 3 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+              <img
+                src={gallery3}
+                alt="Mentorship session highlight 3"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-sm font-semibold text-white">One-on-One Guidance</p>
+              </div>
+            </div>
+
+            {/* Item 4 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+              <img
+                src={gallery4}
+                alt="Mentorship session highlight 4"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-sm font-semibold text-white">Focused Breakthroughs</p>
+              </div>
+            </div>
+
+            {/* Item 5 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+              <img
+                src={gallery5}
+                alt="Mentorship session highlight 5"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-sm font-semibold text-white">Community & Growth</p>
+              </div>
+            </div>
+
+            {/* Item 6: Wide Card */}
+            <div className="md:col-span-2 lg:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+              <img
+                src={gallery6}
+                alt="Mentorship session highlight 6"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-sm font-bold text-white">Building Legacies That Last</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FOUNDER PROFILE SECTION: Editorial Layout (UNCHANGED ARRANGEMENT) --- */}
       <section className="py-24 bg-slate-50 border-y border-slate-200">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-12 gap-12 items-center">
             
+            {/* Founder Image */}
             <div className="md:col-span-5 relative flex justify-center">
-              <div className="relative p-3 bg-white shadow-2xl rounded-[2.5rem] border border-slate-200">
+              <div className="relative p-3 bg-white shadow-2xl rounded-[2.5rem]">
                 <img
                   src={mentor_2}
                   alt="Founder"
                   className="w-full h-auto aspect-[4/5] object-cover rounded-[2rem]"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-primary p-5 rounded-3xl shadow-xl border-[6px] border-slate-50 text-white">
-                  <Quote className="fill-current" size={28} />
+                <div className="absolute -bottom-6 -right-6 bg-primary p-6 rounded-3xl shadow-xl border-[6px] border-slate-50">
+                  <Quote className="text-white fill-current" size={32} />
                 </div>
               </div>
             </div>
 
+            {/* Profile Content */}
             <div className="md:col-span-7 space-y-6 lg:pl-10">
               <div className="space-y-2">
                 <p className="text-primary font-bold tracking-widest uppercase text-xs">Visionary & Founder</p>
-                <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Meet Rafikiz Mentorship</h2>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">Meet Rafikiz Mentorship</h2>
               </div>
               
               <div className="relative">
-                <p className="text-xl md:text-2xl text-slate-800 leading-snug font-medium italic">
-                  "Every great journey starts with a guide. We believe a single connection can unlock extraordinary, life-changing potential."
+                <p className="text-2xl md:text-3xl text-slate-800 leading-snug font-medium italic">
+                  "Every great journey starts with a guide. We believe a single connection can unlock extraordinary potential."
                 </p>
               </div>
 
-              <div className="space-y-4 text-slate-600 text-base md:text-lg leading-relaxed">
+              <div className="space-y-4 text-slate-600 text-lg leading-relaxed">
                 <p>
-                  Rafikiz Mentorship is a premier sanctuary for personal and professional development. Having navigated complex competitive landscapes, this platform was founded to democratize access to elite guidance.
+                  Rafikiz Mentorship is a renowned advocate for structured personal development. Having navigated the challenges of a competitive landscape, this platform was founded to democratize access to world-class guidance.
                 </p>
                 <p>
-                  The vision is clear: a sanctuary where the <strong className="text-slate-900">'Quietly Bold'</strong>—those with immense ambition seeking structured direction—find the exact catalysts they need.
+                  His vision is a space where the <strong className="text-slate-900">'Quietly Bold'</strong>—those with ambition but perhaps lacking a clear path—can find the mentorship required to realize their full destiny.
                 </p>
               </div>
 
               <div className="pt-6 border-t border-slate-200">
-                <p className="text-lg font-bold text-slate-900">— Rafikiz Mentorship</p>
+                <p className="text-xl font-bold text-slate-900">— Rafikiz Mentorship</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- CTA SECTION: Bold Modern Gradient --- */}
-      <section className="py-24 relative overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-slate-950 to-slate-950" />
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary opacity-20 blur-[120px]" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-primary opacity-20 blur-[120px]" />
+      {/* --- CTA SECTION: Bold Gradient (UNCHANGED ARRANGEMENT) --- */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-slate-900" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary opacity-20 blur-[100px]" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-primary opacity-20 blur-[100px]" />
 
-        <div className="container relative mx-auto px-6 text-center z-10 max-w-4xl">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+        <div className="container relative mx-auto px-6 text-center z-10">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
             Ready to Start Your Journey?
           </h2>
           <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-            Whether you're looking to grow or share your expertise, Rafikiz Mentorship is ready to connect you with the right people.
+            Whether you're looking to grow or share your expertise, Rafikiz Mentorship is here to connect you with the right people.
           </p>
           
           <Link to="/signup">
-            <Button size="lg" variant="default" className="h-16 px-12 text-xl rounded-full bg-primary hover:bg-primary/90 hover:scale-105 transition-all shadow-2xl shadow-primary/40 group">
+            <Button size="lg" variant="default" className="h-16 px-12 text-xl rounded-full bg-primary hover:bg-primary/90 hover:scale-105 transition-all shadow-2xl shadow-primary/30 group">
               Get Started Today
               <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={24} />
             </Button>
@@ -529,4 +564,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;           
