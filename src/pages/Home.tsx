@@ -240,12 +240,13 @@ import heroImage from "@/assets/hero-mentorship-2.jpg";
 import mentor_2 from "@/assets/mentor_2.jpg";
 import frankImage from "@/assets/frank_molla_mid_section.jpg";
 
-// Newly uploaded gallery images for Home (gallery_1 to gallery_5)
+// Newly uploaded gallery images for Home (gallery_1 to gallery_6)
 import gallery1 from "@/assets/gallery_1.jpg";
 import gallery2 from "@/assets/gallery_2.jpg";
 import gallery3 from "@/assets/gallery_3.jpg";
 import gallery4 from "@/assets/gallery_4.jpg";
 import gallery5 from "@/assets/gallery_5.jpg";
+import gallery6 from "@/assets/gallery_6.jpg";
 
 const Home = () => {
   return (
@@ -380,7 +381,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- 5-IMAGE BENTO GALLERY SHOWCASE (gallery_1 to gallery_5) --- */}
+      {/* --- 6-IMAGE BALANCED BENTO GALLERY SHOWCASE (gallery_1 to gallery_6) --- */}
       <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
         
@@ -400,70 +401,84 @@ const Home = () => {
             </p>
           </div>
 
-          {/* 5-Item Asymmetric Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[260px]">
-            {/* Gallery 1: Featured Large Card (Spans 2 cols, 2 rows) */}
-            <div className="md:col-span-2 row-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl">
+          {/* Balanced 6-Item Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Gallery 1 */}
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
               <img
                 src={gallery1}
                 alt="Mentorship session highlight 1"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-8 left-8 right-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+              <div className="absolute bottom-6 left-6 right-6">
                 <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/30">Live Workshop</span>
-                <h4 className="text-2xl font-bold text-white mt-3">Transforming Ambition into Action</h4>
+                <h4 className="text-xl font-bold text-white mt-2">Transforming Ambition into Action</h4>
               </div>
             </div>
 
             {/* Gallery 2 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
               <img
                 src={gallery2}
                 alt="Mentorship session highlight 2"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <p className="text-sm font-semibold text-white">Meaningful Dialogues</p>
+                <p className="text-base font-semibold text-white">Meaningful Dialogues & Insight</p>
               </div>
             </div>
 
             {/* Gallery 3 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
               <img
                 src={gallery3}
                 alt="Mentorship session highlight 3"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <p className="text-sm font-semibold text-white">One-on-One Guidance</p>
+                <p className="text-base font-semibold text-white">One-on-One Dedicated Guidance</p>
               </div>
             </div>
 
             {/* Gallery 4 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
               <img
                 src={gallery4}
                 alt="Mentorship session highlight 4"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <p className="text-sm font-semibold text-white">Focused Breakthroughs</p>
+                <p className="text-base font-semibold text-white">Focused Breakthroughs & Clarity</p>
               </div>
             </div>
 
-            {/* Gallery 5 (Spans 2 columns on desktop) */}
-            <div className="md:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl">
+            {/* Gallery 5 */}
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
               <img
                 src={gallery5}
                 alt="Mentorship session highlight 5"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-base font-semibold text-white">Community & Shared Growth</p>
+              </div>
+            </div>
+
+            {/* Gallery 6 (Fixed aspect & object positioning so person is fully visible) */}
+            <div className="relative group overflow-hidden rounded-[2rem] bg-slate-900 border border-slate-800 shadow-xl h-[320px]">
+              <img
+                src={gallery6}
+                alt="Mentorship session highlight 6"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-sm font-bold text-white">Community & Growth</p>
+                <p className="text-lg font-bold text-white">Building Legacies That Last</p>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -545,4 +560,4 @@ const Home = () => {
   );
 };
 
-export default Home;                
+export default Home;                  
