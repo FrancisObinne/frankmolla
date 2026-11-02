@@ -381,11 +381,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- STUNNING CINEMATIC GALLERY WITH PERFECTED FRAMING --- */}
+      {/* --- BULLETPROOF 6-IMAGE GALLERY SECTION --- */}
       <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
-        {/* Glow effects */}
         <div className="absolute top-1/3 left-1/5 w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -403,99 +401,40 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Optimized Grid Layout for Vertical/Portrait Photos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Gallery 1 */}
-            <div className="lg:col-span-2 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[380px]">
-              <img
-                src={gallery1}
-                alt="Mentorship session highlight 1"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/20 px-3 py-1 rounded-full border border-primary/30">Live Workshop</span>
-                <h4 className="text-2xl font-bold text-white mt-3">Transforming Ambition into Action</h4>
-              </div>
-            </div>
+          {/* Clean 3-Column Uniform Grid with container padding so NO images are ever cut off */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { img: gallery1, title: "Transforming Ambition into Action", tag: "Live Workshop" },
+              { img: gallery2, title: "Meaningful Dialogues & Insight", tag: "Engagement" },
+              { img: gallery3, title: "One-on-One Dedicated Guidance", tag: "Mentorship" },
+              { img: gallery4, title: "Focused Breakthroughs & Clarity", tag: "Milestones" },
+              { img: gallery5, title: "Community & Shared Growth", tag: "Community" },
+              { img: gallery6, title: "Building Legacies That Last", tag: "Legacy" },
+            ].map((item, idx) => (
+              <div 
+                key={idx} 
+                className="group relative bg-slate-900 border border-slate-800 rounded-[2rem] p-4 shadow-2xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300"
+              >
+                {/* Image Container with object-contain to guarantee 100% visibility of heads/bodies */}
+                <div className="relative w-full h-[280px] bg-slate-950 rounded-[1.5rem] overflow-hidden flex items-center justify-center">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
 
-            {/* Gallery 6: Dedicated Tall Slot so head and full upper body show clearly */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[380px]">
-              <img
-                src={gallery6}
-                alt="Mentorship session highlight 6"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider">Legacy</span>
-                <p className="text-xl font-bold text-white mt-1">Building Legacies That Last</p>
-              </div>
-            </div>
-
-            {/* Gallery 2 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
-              <img
-                src={gallery2}
-                alt="Mentorship session highlight 2"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                <div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">Engagement</span>
-                  <p className="text-lg font-bold text-white mt-1">Meaningful Dialogues</p>
+                {/* Caption / Details */}
+                <div className="pt-5 px-2 pb-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                    {item.tag}
+                  </span>
+                  <h4 className="text-xl font-bold text-white mt-3 group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h4>
                 </div>
               </div>
-            </div>
-
-            {/* Gallery 3 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
-              <img
-                src={gallery3}
-                alt="Mentorship session highlight 3"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                <div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">Mentorship</span>
-                  <p className="text-lg font-bold text-white mt-1">One-on-One Dedicated Guidance</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Gallery 4 */}
-            <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-xl h-[340px]">
-              <img
-                src={gallery4}
-                alt="Mentorship session highlight 4"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                <div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">Milestones</span>
-                  <p className="text-lg font-bold text-white mt-1">Focused Breakthroughs</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Gallery 5: Wide Bottom Banner */}
-            {/* <div className="lg:col-span-3 relative group overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-800 shadow-2xl h-[300px]">
-              <img
-                src={gallery5}
-                alt="Mentorship session highlight 5"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-80" />
-              <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/20 px-3 py-1 rounded-full border border-primary/30">Community</span>
-                  <h4 className="text-2xl font-bold text-white mt-3">Shared Growth & Connection</h4>
-                </div>
-                <p className="text-slate-300 text-sm max-w-xs">Connecting ambition with timeless wisdom for sustainable success.</p>
-              </div>
-            </div> */}
-
+            ))}
           </div>
         </div>
       </section>
