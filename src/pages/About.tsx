@@ -520,7 +520,6 @@ const About = () => {
             {/* Dynamic height classes: scales from 360px on mobile up to 620px on desktop screens */}
             <div className="relative w-full h-[360px] sm:h-[500px] md:h-[580px] lg:h-[620px] bg-slate-100 rounded-[2.2rem] overflow-hidden flex items-center justify-center">
               <img
-                {/* src={frankAboutImage} */}
                 src={gallery16}
                 alt="Frank Molla leading a discussion"
                 loading="eager"
