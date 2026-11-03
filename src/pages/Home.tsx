@@ -450,7 +450,8 @@ const Home = () => {
               { img: gallery3, title: "One-on-One Dedicated Guidance", tag: "Mentorship" },
               { img: gallery4, title: "Focused Breakthroughs & Clarity", tag: "Milestones" },
               { img: gallery5, title: "Community & Shared Growth", tag: "Community" },
-              { img: gallery6, title: "Building Legacies That Last", tag: "Legacy" },
+              // { img: gallery6, title: "Building Legacies That Last", tag: "Legacy" },
+            { img: gallery7, title: "Building Legacies That Last", tag: "Legacy" },
             ].map((item, idx) => (
               <div 
                 key={idx} 
