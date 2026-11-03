@@ -680,7 +680,7 @@ const SignUp = () => {
                 <UserPlus size={24} />{" "}
                 <div>
                   {" "}
-                  <div className="font-semibold">Find a Mentor</div>{" "}
+                  <div className="font-semibold">Connect to Rafiki</div>{" "}
                   <div className="text-xs opacity-80">I want guidance</div>{" "}
                 </div>{" "}
               </Button>
