@@ -588,13 +588,168 @@
 
 // export default SignUp;
 
+// import { useState } from "react";
+// import { useSearchParams, useNavigate } from "react-router-dom";
+// import { useToast } from "@/hooks/use-toast";
+// import { useSignUp } from "@/hooks/useAuthMutations";
+// import { MentorFormValues, MenteeFormValues } from "@/schemas/signup";
+
+// // Import your new, clean form components
+// import { MenteeForm } from "@/components/forms/MenteeForm";
+// import { MentorForm } from "@/components/forms/MentorForm";
+
+// import Navigation from "@/components/Navigation";
+// import Footer from "@/components/Footer";
+// import {
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardHeader,
+//   CardTitle,
+// } from "@/components/ui/card";
+// import { Button } from "@/components/ui/button";
+// import { UserPlus, Users } from "lucide-react";
+
+// const SignUp = () => {
+//   const [searchParams] = useSearchParams();
+//   const navigate = useNavigate();
+//   const { toast } = useToast();
+
+//   const initialType = searchParams.get("type") || "mentee";
+//   const [userType, setUserType] = useState<"mentor" | "mentee">(
+//     initialType === "mentor" ? "mentor" : "mentee"
+//   );
+
+//   const { mutate: signUp, isPending: isSubmitting } = useSignUp();
+
+//   // This single handler works for BOTH forms
+//   const handleApplicationSubmit = (
+//     values: MenteeFormValues | MentorFormValues
+//   ) => {
+//     signUp(
+//       { payload: values, type: userType }, // Pass the user type along with form data
+//       {
+//         onSuccess: () => {
+//           toast({
+//             title: "Application Submitted!",
+//             description: `Thank you for your interest in becoming a ${userType}. We'll be in touch soon.`,
+//           });
+//           navigate("/");
+//         },
+//         onError: (error) => {
+//           toast({
+//             title: "Submission Failed",
+//             description: error.message || "Please try again later.",
+//             variant: "destructive",
+//           });
+//         },
+//       }
+//     );
+//   };
+
+//   return (
+//     <div className="min-h-screen flex flex-col">
+//       <Navigation />
+//       <section className="bg-hero-gradient py-16">
+//         {/* ... Hero Section ... */}
+//         <div className="container mx-auto px-4">
+//           <div className="max-w-3xl mx-auto text-center animate-fade-in">
+//             <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
+//               Join Rafikiz Mentorship
+//             </h1>
+//             <p className="text-xl text-primary-foreground/90">
+//               Start your mentorship journey today. Connect, learn, and grow.
+//             </p>
+//           </div>
+//         </div>
+//       </section>
+
+//       <section className="py-20 bg-background">
+//         <div className="container mx-auto px-4">
+//           <div className="max-w-2xl mx-auto">
+//             {/* User Type Selector (no changes needed here) */}
+//             {/* <div className="grid grid-cols-2 gap-4 mb-8"> */}
+//             <div className="grid grid-cols-1 gap-4 mb-8">
+//               <Button
+//                 type="button"
+//                 variant={userType === "mentee" ? "default" : "outline"}
+//                 onClick={() => setUserType("mentee")}
+//                 className="h-auto py-6 flex flex-col items-center gap-2"
+//               >
+//                 {" "}
+//                 <UserPlus size={24} />{" "}
+//                 <div>
+//                   {" "}
+//                   <div className="font-semibold">Connect to Rafiki</div>{" "}
+//                   <div className="text-xs opacity-80">I want guidance</div>{" "}
+//                 </div>{" "}
+//               </Button>
+//               {/* <Button
+//                 type="button"
+//                 variant={userType === "mentor" ? "default" : "outline"}
+//                 onClick={() => setUserType("mentor")}
+//                 className="h-auto py-6 flex flex-col items-center gap-2"
+//               >
+//                 {" "}
+//                 <Users size={24} />{" "}
+//                 <div>
+//                   {" "}
+//                   <div className="font-semibold">Become a Mentor</div>{" "}
+//                   <div className="text-xs opacity-80">
+//                     {" "}
+//                     I want to help others{" "}
+//                   </div>{" "}
+//                 </div>{" "}
+//               </Button> */}
+//             </div>
+
+//             <Card className="border-border">
+//               <CardHeader>
+//                 {/* ...Your dynamic CardHeader... */}
+//                 <CardTitle>
+//                   {userType === "mentee"
+//                     ? "Executive Mentorship Interest Questionnaire"
+//                     : "Mentor Application"}
+//                 </CardTitle>
+//                 <CardDescription>
+//                   {userType === "mentee"
+//                     ? "Purpose: To help us understand which areas of growth and support matter most to you right now."
+//                     : "Share your experience and how you'd like to help others grow."}
+//                 </CardDescription>
+//               </CardHeader>
+//               <CardContent>
+//                 {/* --- THIS IS THE KEY CHANGE --- */}
+//                 {userType === "mentee" ? (
+//                   <MenteeForm
+//                     onSubmit={handleApplicationSubmit}
+//                     isSubmitting={isSubmitting}
+//                   />
+//                 ) : (
+//                   <MentorForm
+//                     onSubmit={handleApplicationSubmit}
+//                     isSubmitting={isSubmitting}
+//                   />
+//                 )}
+//               </CardContent>
+//             </Card>
+//           </div>
+//         </div>
+//       </section>
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default SignUp;
+
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useSignUp } from "@/hooks/useAuthMutations";
 import { MentorFormValues, MenteeFormValues } from "@/schemas/signup";
 
-// Import your new, clean form components
+// Import form components
 import { MenteeForm } from "@/components/forms/MenteeForm";
 import { MentorForm } from "@/components/forms/MentorForm";
 
@@ -608,7 +763,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { UserPlus, Users } from "lucide-react";
+import { UserPlus, Sparkles } from "lucide-react";
+
+// Unused gallery asset for SignUp Hero background
+import heroBg from "@/assets/gallery_14.jpg";
 
 const SignUp = () => {
   const [searchParams] = useSearchParams();
@@ -622,12 +780,12 @@ const SignUp = () => {
 
   const { mutate: signUp, isPending: isSubmitting } = useSignUp();
 
-  // This single handler works for BOTH forms
+  // Handler for BOTH forms
   const handleApplicationSubmit = (
     values: MenteeFormValues | MentorFormValues
   ) => {
     signUp(
-      { payload: values, type: userType }, // Pass the user type along with form data
+      { payload: values, type: userType },
       {
         onSuccess: () => {
           toast({
@@ -648,77 +806,80 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 selection:bg-primary/20 font-sans overflow-x-hidden">
       <Navigation />
-      <section className="bg-hero-gradient py-16">
-        {/* ... Hero Section ... */}
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
+
+      {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+      <section className="relative min-h-[45vh] sm:min-h-[60vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 md:py-20 overflow-hidden border-b border-slate-200/80 bg-slate-900">
+        <div className="absolute inset-0 w-full h-full">
+          <img
+            src={heroBg}
+            alt="Join Rafikiz Mentorship"
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover object-top filter brightness-[0.35] contrast-[1.05]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/40" />
+        </div>
+
+        <div className="container relative mx-auto px-4 sm:px-6 z-10">
+          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-md">
+              <Sparkles size={14} className="animate-pulse text-primary shrink-0" />
+              <span>Begin Your Journey</span>
+            </div>
+            
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
               Join Rafikiz Mentorship
             </h1>
-            <p className="text-xl text-primary-foreground/90">
+            
+            <p className="text-base sm:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl mx-auto">
               Start your mentorship journey today. Connect, learn, and grow.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      {/* --- FORM SECTION --- */}
+      <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
-            {/* User Type Selector (no changes needed here) */}
-            {/* <div className="grid grid-cols-2 gap-4 mb-8"> */}
+            {/* User Type Selector */}
             <div className="grid grid-cols-1 gap-4 mb-8">
               <Button
                 type="button"
                 variant={userType === "mentee" ? "default" : "outline"}
                 onClick={() => setUserType("mentee")}
-                className="h-auto py-6 flex flex-col items-center gap-2"
+                className={`h-auto py-5 sm:py-6 flex flex-col items-center gap-2 rounded-2xl border transition-all ${
+                  userType === "mentee"
+                    ? "bg-primary text-white shadow-lg shadow-primary/20 border-primary"
+                    : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
+                }`}
               >
-                {" "}
-                <UserPlus size={24} />{" "}
-                <div>
-                  {" "}
-                  <div className="font-semibold">Connect to Rafiki</div>{" "}
-                  <div className="text-xs opacity-80">I want guidance</div>{" "}
-                </div>{" "}
+                <UserPlus size={24} />
+                <div className="text-center">
+                  <div className="font-extrabold text-base sm:text-lg">Connect to Rafiki</div>
+                  <div className="text-xs opacity-90 font-medium">I want guidance</div>
+                </div>
               </Button>
-              {/* <Button
-                type="button"
-                variant={userType === "mentor" ? "default" : "outline"}
-                onClick={() => setUserType("mentor")}
-                className="h-auto py-6 flex flex-col items-center gap-2"
-              >
-                {" "}
-                <Users size={24} />{" "}
-                <div>
-                  {" "}
-                  <div className="font-semibold">Become a Mentor</div>{" "}
-                  <div className="text-xs opacity-80">
-                    {" "}
-                    I want to help others{" "}
-                  </div>{" "}
-                </div>{" "}
-              </Button> */}
             </div>
 
-            <Card className="border-border">
-              <CardHeader>
-                {/* ...Your dynamic CardHeader... */}
-                <CardTitle>
+            {/* Application Card */}
+            <Card className="border border-slate-200/90 bg-white rounded-[1.8rem] sm:rounded-[2.4rem] shadow-sm">
+              <CardHeader className="p-6 sm:p-8 pb-4">
+                <CardTitle className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                   {userType === "mentee"
                     ? "Executive Mentorship Interest Questionnaire"
                     : "Mentor Application"}
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-slate-600 text-sm sm:text-base leading-relaxed mt-1">
                   {userType === "mentee"
                     ? "Purpose: To help us understand which areas of growth and support matter most to you right now."
                     : "Share your experience and how you'd like to help others grow."}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                {/* --- THIS IS THE KEY CHANGE --- */}
+
+              <CardContent className="p-6 sm:p-8 pt-2">
                 {userType === "mentee" ? (
                   <MenteeForm
                     onSubmit={handleApplicationSubmit}
