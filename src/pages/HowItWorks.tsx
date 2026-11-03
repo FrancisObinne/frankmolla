@@ -837,7 +837,7 @@ const HowItWorks = () => {
             </Card>
 
             {/* Mentors Benefits */}
-            <Card className="border border-slate-200/90 bg-white rounded-[1.8rem] sm:rounded-[2.2rem] shadow-sm hover:shadow-md transition-shadow">
+            {/* <Card className="border border-slate-200/90 bg-white rounded-[1.8rem] sm:rounded-[2.2rem] shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-6 sm:p-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-4 sm:mb-6">
                   <Camera size={14} />
@@ -853,7 +853,7 @@ const HowItWorks = () => {
                   ))}
                 </ul>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </section>
