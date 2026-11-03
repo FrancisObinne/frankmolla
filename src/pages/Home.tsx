@@ -1099,7 +1099,7 @@ const Home = () => {
               </div>
               <div className="pt-6 px-3 pb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full border border-primary/20">
-                  Live Workshop
+                  Mentorship
                 </span>
                 <h4 className="text-2xl font-bold text-slate-900 mt-3 group-hover:text-primary transition-colors">
                   Transforming Ambition into Action
@@ -1141,7 +1141,7 @@ const Home = () => {
               </div>
               <div className="pt-6 px-3 pb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full border border-primary/20">
-                  Mentorship
+                  Live Workshop
                 </span>
                 <h4 className="text-xl font-bold text-slate-900 mt-3 group-hover:text-primary transition-colors">
                   One-on-One Dedicated Guidance
