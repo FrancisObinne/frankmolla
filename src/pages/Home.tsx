@@ -899,6 +899,7 @@ import gallery3 from "@/assets/gallery_3.jpg";
 import gallery4 from "@/assets/gallery_4.jpg";
 import gallery5 from "@/assets/gallery_5.jpg";
 import gallery7 from "@/assets/gallery_7.jpg";
+import gallery16 from "@/assets/gallery_16.jpg";
 
 const Home = () => {
   return (
@@ -954,7 +955,7 @@ const Home = () => {
             <div className="absolute -inset-2 bg-gradient-to-tr from-primary/20 via-blue-400/10 to-transparent rounded-[2.8rem] blur-2xl opacity-60" />
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-white">
               <img
-                src={heroImage}
+                src={gallery16}
                 alt="Mentorship"
                 loading="eager"
                 decoding="async"
