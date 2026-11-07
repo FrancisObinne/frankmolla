@@ -1129,13 +1129,6 @@ import { Button } from "@/components/ui/button";
 import { UserPlus, Search, MessageCircle, TrendingUp, CheckCircle, Sparkles, ArrowRight, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Hero background image & dedicated step assets for HowItWorks.tsx
-import heroBg from "@/assets/gallery_1.jpg";
-import gallery11 from "@/assets/gallery_11.jpg";
-import gallery12 from "@/assets/gallery_12.jpg";
-import gallery13 from "@/assets/gallery_13.jpg";
-import gallery14 from "@/assets/gallery_14.jpg";
-
 const HowItWorks = () => {
   const steps = [
     {
@@ -1143,7 +1136,8 @@ const HowItWorks = () => {
       title: "Sign Up",
       description: "Create your profile in minutes. Tell us about your goals, interests, and what you're looking for in a mentor or mentee.",
       color: "bg-blue-50 text-blue-600 border-blue-200",
-      image: gallery11,
+      visualTitle: "A clear starting point",
+      visualItems: ["Your goals", "Your experience", "What you need"],
       badge: "Step 1"
     },
     {
@@ -1151,7 +1145,8 @@ const HowItWorks = () => {
       title: "Get Matched",
       description: "Our intelligent matching system connects you with mentors or mentees who align with your goals, experience, and aspirations.",
       color: "bg-primary/10 text-primary border-primary/20",
-      image: gallery12,
+      visualTitle: "A connection that fits",
+      visualItems: ["Shared goals", "Relevant experience", "A strong fit"],
       badge: "Step 2"
     },
     {
@@ -1159,7 +1154,8 @@ const HowItWorks = () => {
       title: "Connect & Meet",
       description: "Start your mentorship journey with an introductory session. Set goals, establish expectations, and build rapport.",
       color: "bg-purple-50 text-purple-600 border-purple-200",
-      image: gallery13,
+      visualTitle: "A conversation with purpose",
+      visualItems: ["Share openly", "Set a direction", "Build trust"],
       badge: "Step 3"
     },
     {
@@ -1167,7 +1163,8 @@ const HowItWorks = () => {
       title: "Grow Together",
       description: "Engage in regular mentorship sessions. Track progress, overcome challenges, and celebrate achievements along the way.",
       color: "bg-emerald-50 text-emerald-600 border-emerald-200",
-      image: gallery14,
+      visualTitle: "Progress you can carry forward",
+      visualItems: ["Choose a next step", "Practice", "Reflect & grow"],
       badge: "Step 4"
     }
   ];
@@ -1186,17 +1183,40 @@ const HowItWorks = () => {
     <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 selection:bg-primary/20 font-sans overflow-x-hidden">
       <Navigation />
       
-      {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+      {/* --- HERO SECTION --- */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 md:py-24 overflow-hidden border-b border-slate-200/80 bg-slate-900">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src={heroBg}
-            alt="Mentorship process interaction"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-top filter brightness-[0.35] contrast-[1.05]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/40" />
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+            <defs>
+              <linearGradient id="how-hero-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#111827" />
+                <stop offset="50%" stopColor="#25304d" />
+                <stop offset="100%" stopColor="#4a203f" />
+              </linearGradient>
+              <radialGradient id="how-hero-glow">
+                <stop offset="0%" stopColor="#a78bfa" stopOpacity=".5" />
+                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="how-hero-path" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity="0" />
+                <stop offset="50%" stopColor="#fda4af" stopOpacity=".7" />
+                <stop offset="100%" stopColor="#c4b5fd" stopOpacity=".12" />
+              </linearGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#how-hero-bg)" />
+            <ellipse cx="1350" cy="170" rx="520" ry="410" fill="url(#how-hero-glow)" />
+            <path d="M-80 710 C190 580 350 790 590 630 S970 360 1160 500 1450 650 1680 300" fill="none" stroke="url(#how-hero-path)" strokeWidth="3" />
+            <path d="M-50 780 C250 640 380 860 680 690 S1030 450 1250 590 1490 710 1680 420" fill="none" stroke="url(#how-hero-path)" strokeWidth="2" opacity=".65" />
+            <g fill="#fda4af">
+              <circle cx="270" cy="625" r="8" /><circle cx="590" cy="630" r="7" /><circle cx="1160" cy="500" r="8" />
+            </g>
+            <g fill="none" stroke="#fff" strokeOpacity=".12">
+              <circle cx="270" cy="625" r="44" /><circle cx="270" cy="625" r="82" />
+              <circle cx="1160" cy="500" r="50" /><circle cx="1160" cy="500" r="92" />
+            </g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/25 to-slate-950/20" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_8%,rgba(2,6,23,0.38)_100%)]" />
         </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 z-10">
@@ -1255,19 +1275,100 @@ const HowItWorks = () => {
                   </p>
                 </div>
 
-                {/* Step Image Box */}
-                <div className="md:col-span-5 relative w-full h-[200px] sm:h-[260px] bg-white rounded-[1.4rem] sm:rounded-[1.8rem] overflow-hidden flex items-center justify-center p-2 border border-slate-200/80 shadow-inner">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain rounded-[1rem] sm:rounded-[1.4rem] transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                {/* Step Infographic */}
+                <div
+                  role="img"
+                  aria-label={`${step.title}: ${step.visualItems.join(", ")}`}
+                  className="md:col-span-5 relative min-h-[210px] sm:min-h-[250px] w-full overflow-hidden rounded-[1.4rem] sm:rounded-[1.8rem] border border-white/80 bg-gradient-to-br from-white via-rose-50/70 to-violet-50/90 p-4 shadow-inner sm:p-5"
+                >
+                  <div aria-hidden="true" className="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-2xl" />
+                  <div aria-hidden="true" className="absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-violet-200/40 blur-2xl" />
+                  <div className="relative flex h-full min-h-[178px] flex-col justify-between sm:min-h-[208px]">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500 sm:text-[10px]">Your mentorship journey</span>
+                      <span className="rounded-full border border-white bg-white/80 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-primary shadow-sm">{step.badge}</span>
+                    </div>
+                    <div className="flex items-center justify-center py-3">
+                      <div className="relative flex h-[82px] w-[82px] items-center justify-center rounded-[1.7rem] border border-white bg-white/90 text-primary shadow-lg shadow-primary/10 sm:h-24 sm:w-24">
+                        <div aria-hidden="true" className="absolute inset-2 rounded-[1.2rem] border border-primary/10" />
+                        <step.icon size={34} strokeWidth={1.7} className="relative sm:h-10 sm:w-10" aria-hidden="true" />
+                        <span aria-hidden="true" className="absolute -right-2 -top-2 h-4 w-4 rounded-full border-[3px] border-white bg-emerald-400" />
+                      </div>
+                    </div>
+                    <div className="rounded-2xl border border-white bg-white/85 p-3 shadow-sm backdrop-blur-sm sm:p-3.5">
+                      <div className="mb-2.5 flex items-center justify-between gap-2">
+                        <span className="text-xs font-bold text-slate-800 sm:text-sm">{step.visualTitle}</span>
+                        <ArrowRight size={14} className="shrink-0 text-primary" aria-hidden="true" />
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {step.visualItems.map((item, itemIndex) => (
+                          <span key={item} className={`rounded-full px-2.5 py-1 text-[9px] font-semibold sm:text-[10px] ${itemIndex === 0 ? "bg-primary/10 text-primary" : "bg-slate-100 text-slate-600"}`}>
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* --- FIRST SESSION GUIDE --- */}
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50 py-16 sm:py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-[90px]" />
+        <div className="container relative mx-auto px-4 sm:px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="inline-flex rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-primary sm:px-3.5 sm:py-1.5 sm:text-xs">
+              A confident first step
+            </span>
+            <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Make your first session feel easy.
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-lg">
+              You don’t need a perfect plan. A little reflection helps you make the most of your time together.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-9 grid max-w-5xl gap-3 sm:mt-12 sm:gap-5 md:grid-cols-3">
+            {[
+              {
+                number: "01",
+                title: "Bring one goal",
+                description: "Think about what you want to move forward, even if the goal is still taking shape.",
+                prompt: "What would feel like progress?",
+              },
+              {
+                number: "02",
+                title: "Start with your context",
+                description: "Share what you’ve tried, where you feel stuck, and the kind of support that works for you.",
+                prompt: "What should your mentor know?",
+              },
+              {
+                number: "03",
+                title: "Choose a next step",
+                description: "Close by agreeing on one useful action to take before your next conversation.",
+                prompt: "What will you try first?",
+              },
+            ].map((item) => (
+              <article key={item.number} className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm sm:rounded-[1.6rem] sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-sm font-extrabold text-primary">{item.number}</span>
+                  <span aria-hidden="true" className="h-px w-12 bg-gradient-to-r from-primary/40 to-transparent" />
+                </div>
+                <h3 className="mt-5 text-lg font-bold tracking-tight text-slate-900 sm:text-xl">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">{item.description}</p>
+                <p className="mt-5 rounded-xl bg-slate-50 px-3.5 py-3 text-xs font-semibold text-slate-700 sm:text-sm">{item.prompt}</p>
+              </article>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-6 flex max-w-2xl items-center justify-center gap-2 text-center text-xs font-medium leading-relaxed text-slate-500 sm:mt-8 sm:text-sm">
+            <CheckCircle size={16} className="shrink-0 text-emerald-500" aria-hidden="true" />
+            Your mentor is there to meet you where you are; the conversation can evolve as you do.
+          </p>
         </div>
       </section>
 

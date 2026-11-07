@@ -167,6 +167,7 @@
 
 // export default Programs;
 
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -174,23 +175,16 @@ import { Button } from "@/components/ui/button";
 import { Briefcase, Rocket, GraduationCap, Palette, Heart, Link as LinkIcon, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Unused gallery assets for Programs.tsx (avoiding Home, About, and HowItWorks assets)
-import heroBg from "@/assets/gallery_15.jpg";
-import gallery16 from "@/assets/gallery_16.jpg";
-import heroImage from "@/assets/hero-mentorship-2.jpg";
-import gallery17 from "@/assets/gallery_17.jpg";
-import gallery18 from "@/assets/gallery_18.jpg";
-import gallery19 from "@/assets/gallery_19.jpg";
-import gallery20 from "@/assets/gallery_20.jpg";
-
 const Programs = () => {
+  const [activeCategory, setActiveCategory] = useState("All programs");
+
   const programs = [
     {
       icon: Briefcase,
       title: "Career Development",
       description: "Navigate your career path with guidance from industry professionals. Get advice on career transitions, promotions, and professional growth.",
       areas: ["Career planning", "Interview preparation", "Skill development", "Leadership coaching"],
-      image: heroImage,
+      category: "Career",
       badgeColor: "bg-blue-50 text-blue-600 border-blue-200"
     },
     {
@@ -198,7 +192,7 @@ const Programs = () => {
       title: "Entrepreneurship",
       description: "Launch and grow your business with mentors who have been there. Learn from successful entrepreneurs about strategy, funding, and scaling.",
       areas: ["Business planning", "Fundraising", "Product development", "Market strategy"],
-      image: gallery17,
+      category: "Business",
       badgeColor: "bg-primary/10 text-primary border-primary/20"
     },
     {
@@ -206,7 +200,7 @@ const Programs = () => {
       title: "Academic Mentorship",
       description: "Excel in your academic journey with guidance from experienced educators and professionals in your field of study.",
       areas: ["Study strategies", "Research guidance", "Career planning", "Graduate school prep"],
-      image: gallery18,
+      category: "Learning",
       badgeColor: "bg-purple-50 text-purple-600 border-purple-200"
     },
     {
@@ -214,7 +208,7 @@ const Programs = () => {
       title: "Creative Skills",
       description: "Develop your creative talents with mentorship from established artists, designers, and creative professionals.",
       areas: ["Portfolio development", "Creative techniques", "Industry insights", "Freelancing advice"],
-      image: gallery19,
+      category: "Creative skills",
       badgeColor: "bg-amber-50 text-amber-600 border-amber-200"
     },
     {
@@ -222,7 +216,7 @@ const Programs = () => {
       title: "Personal Growth",
       description: "Build confidence, develop emotional intelligence, and achieve work-life balance with personal development mentors.",
       areas: ["Self-confidence", "Communication skills", "Work-life balance", "Goal setting"],
-      image: gallery20,
+      category: "Personal growth",
       badgeColor: "bg-emerald-50 text-emerald-600 border-emerald-200"
     },
     {
@@ -230,26 +224,57 @@ const Programs = () => {
       title: "Networking & Connections",
       description: "Learn how to build and leverage professional networks effectively to advance your career and personal goals.",
       areas: ["Professional networking", "Personal branding", "Relationship building", "LinkedIn strategies"],
-      image: heroBg,
+      category: "Connections",
       badgeColor: "bg-indigo-50 text-indigo-600 border-indigo-200"
     }
   ];
+  const categories = ["All programs", ...programs.map(({ category }) => category)];
+  const visiblePrograms = activeCategory === "All programs"
+    ? programs
+    : programs.filter(({ category }) => category === activeCategory);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 selection:bg-primary/20 font-sans overflow-x-hidden">
       <Navigation />
       
-      {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+      {/* --- HERO SECTION --- */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 md:py-24 overflow-hidden border-b border-slate-200/80 bg-slate-900">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src={heroBg}
-            alt="Mentorship Programs"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-top filter brightness-[0.35] contrast-[1.05]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/40" />
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+            <defs>
+              <linearGradient id="programs-hero-base" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#101827" />
+                <stop offset="48%" stopColor="#29234b" />
+                <stop offset="100%" stopColor="#46213e" />
+              </linearGradient>
+              <radialGradient id="programs-hero-glow">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity=".45" />
+                <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="programs-hero-violet">
+                <stop offset="0%" stopColor="#8b5cf6" stopOpacity=".42" />
+                <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="programs-hero-path" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity="0" />
+                <stop offset="48%" stopColor="#fda4af" stopOpacity=".62" />
+                <stop offset="100%" stopColor="#c4b5fd" stopOpacity=".12" />
+              </linearGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#programs-hero-base)" />
+            <ellipse cx="290" cy="190" rx="500" ry="400" fill="url(#programs-hero-violet)" />
+            <ellipse cx="1370" cy="690" rx="570" ry="460" fill="url(#programs-hero-glow)" />
+            <path d="M-80 690 C180 580 320 790 560 620 S900 370 1120 510 1430 640 1680 280" fill="none" stroke="url(#programs-hero-path)" strokeWidth="3" />
+            <path d="M-70 770 C230 640 360 850 650 680 S1000 450 1230 580 1470 720 1680 410" fill="none" stroke="url(#programs-hero-path)" strokeWidth="2" opacity=".65" />
+            <g fill="#fda4af"><circle cx="290" cy="605" r="8" /><circle cx="560" cy="620" r="7" /><circle cx="1120" cy="510" r="8" /></g>
+            <g fill="#c4b5fd"><circle cx="850" cy="424" r="7" /><circle cx="1430" cy="510" r="7" /></g>
+            <g fill="none" stroke="#fff" strokeOpacity=".12">
+              <circle cx="290" cy="605" r="42" /><circle cx="290" cy="605" r="78" />
+              <circle cx="1120" cy="510" r="48" /><circle cx="1120" cy="510" r="88" />
+            </g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/25 to-slate-950/20" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_8%,rgba(2,6,23,0.38)_100%)]" />
         </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 z-10">
@@ -282,23 +307,65 @@ const Programs = () => {
             </h2>
           </div>
 
+          <div className="mx-auto mb-8 max-w-5xl rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 sm:mb-10 sm:rounded-[1.6rem] sm:p-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+              <div className="sm:min-w-[190px]">
+                <p className="text-sm font-bold text-slate-900 sm:text-base">What would you like to focus on?</p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-500 sm:text-sm">Choose a goal to find a relevant pathway.</p>
+              </div>
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter mentorship programs by focus area">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    aria-pressed={activeCategory === category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`rounded-full border px-3 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:px-3.5 sm:text-sm ${activeCategory === category ? "border-primary bg-primary text-white shadow-sm" : "border-slate-200 bg-white text-slate-600 hover:border-primary/40 hover:text-primary"}`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <p className="sr-only" aria-live="polite">Showing {visiblePrograms.length} {activeCategory === "All programs" ? "available" : activeCategory.toLowerCase()} mentorship {visiblePrograms.length === 1 ? "program" : "programs"}.</p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
-            {programs.map((program, index) => (
+            {visiblePrograms.map((program) => (
               <Card 
-                key={index} 
+                key={program.title}
                 className="group border border-slate-200/90 bg-slate-50/70 hover:bg-white transition-all duration-300 rounded-[1.8rem] sm:rounded-[2.2rem] p-2 shadow-sm hover:shadow-xl hover:border-primary/40 flex flex-col justify-between"
               >
                 <CardContent className="p-4 sm:p-6 flex flex-col h-full justify-between space-y-6">
                   <div>
-                    {/* Program Image Holder */}
-                    <div className="relative w-full h-[180px] sm:h-[200px] bg-white rounded-[1.4rem] overflow-hidden flex items-center justify-center p-2 border border-slate-200/80 mb-6 shadow-inner">
-                      <img
-                        src={program.image}
-                        alt={program.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain rounded-[1rem] transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
+                    {/* Program pathway infographic */}
+                    <div
+                      role="img"
+                      aria-label={`${program.title} pathway graphic: ${program.areas.slice(0, 3).join(", ")}`}
+                      className="relative mb-6 flex h-[180px] w-full flex-col justify-between overflow-hidden rounded-[1.4rem] border border-white bg-gradient-to-br from-white via-rose-50/70 to-violet-50/90 p-4 shadow-inner sm:h-[200px] sm:p-5"
+                    >
+                      <div aria-hidden="true" className="absolute -right-8 -top-12 h-36 w-36 rounded-full bg-primary/10 blur-2xl transition-transform duration-500 group-hover:scale-125" />
+                      <div aria-hidden="true" className="absolute -bottom-16 -left-8 h-36 w-36 rounded-full bg-violet-200/50 blur-2xl" />
+                      <svg aria-hidden="true" viewBox="0 0 400 180" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-40">
+                        <path d="M-20 140 C80 40 125 180 220 85 S340 35 430 70" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="4 8" />
+                        <circle cx="80" cy="105" r="5" fill="#fb7185" />
+                        <circle cx="220" cy="85" r="5" fill="#8b5cf6" />
+                        <circle cx="340" cy="55" r="5" fill="#34d399" />
+                      </svg>
+                      <div className="relative flex items-center justify-between gap-2">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Mentorship pathway</span>
+                        <span className={`flex h-9 w-9 items-center justify-center rounded-xl border shadow-sm ${program.badgeColor}`}>
+                          <program.icon size={18} aria-hidden="true" />
+                        </span>
+                      </div>
+                      <div className="relative flex items-end justify-between gap-2">
+                        {program.areas.slice(0, 3).map((area, areaIndex) => (
+                          <div key={area} className={`min-w-0 flex-1 rounded-xl border border-white/90 bg-white/85 px-2 py-2.5 text-center shadow-sm backdrop-blur-sm sm:px-2.5 ${areaIndex === 1 ? "-translate-y-2" : ""}`}>
+                            <span className="mx-auto mb-1.5 block h-1.5 w-1.5 rounded-full bg-primary/70" />
+                            <span className="block truncate text-[9px] font-semibold text-slate-700 sm:text-[10px]">{area}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-3 mb-4">

@@ -278,9 +278,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, MessageSquare, HelpCircle, Loader2, Sparkles, ArrowRight } from "lucide-react";
 import { useContactFormMutation } from "@/hooks/useContactFormMutation";
 
-// Unused gallery asset for Contact hero background
-import heroBg from "@/assets/gallery_10.jpg";
-
 const Contact = () => {
   const { toast } = useToast();
   const { mutate, isPending } = useContactFormMutation();
@@ -330,17 +327,43 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 selection:bg-primary/20 font-sans overflow-x-hidden">
       <Navigation />
 
-      {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+      {/* --- CONTACT HERO SECTION --- */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 md:py-24 overflow-hidden border-b border-slate-200/80 bg-slate-900">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src={heroBg}
-            alt="Contact Us"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-top filter brightness-[0.35] contrast-[1.05]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/40" />
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+            <defs>
+              <linearGradient id="contact-hero-base" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#101827" />
+                <stop offset="52%" stopColor="#282349" />
+                <stop offset="100%" stopColor="#43223e" />
+              </linearGradient>
+              <radialGradient id="contact-hero-glow">
+                <stop offset="0%" stopColor="#a78bfa" stopOpacity=".44" />
+                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="contact-hero-connection" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity="0" />
+                <stop offset="52%" stopColor="#fda4af" stopOpacity=".62" />
+                <stop offset="100%" stopColor="#c4b5fd" stopOpacity=".12" />
+              </linearGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#contact-hero-base)" />
+            <ellipse cx="350" cy="160" rx="500" ry="420" fill="url(#contact-hero-glow)" />
+            <ellipse cx="1370" cy="730" rx="560" ry="460" fill="url(#contact-hero-glow)" opacity=".55" />
+            <path d="M-60 660 C210 550 340 770 610 610 S960 360 1190 500 1450 620 1670 300" fill="none" stroke="url(#contact-hero-connection)" strokeWidth="3" />
+            <path d="M-40 760 C250 620 390 850 680 680 S1030 440 1260 580 1480 700 1670 410" fill="none" stroke="url(#contact-hero-connection)" strokeWidth="2" opacity=".65" />
+            <g fill="none" stroke="#fff" strokeOpacity=".16" strokeWidth="2">
+              <rect x="190" y="300" width="200" height="112" rx="30" />
+              <path d="M242 344h96m-96 28h62" strokeLinecap="round" />
+              <rect x="1170" y="235" width="238" height="136" rx="34" />
+              <path d="M1225 285h128m-128 31h86" strokeLinecap="round" />
+            </g>
+            <g fill="#fda4af"><circle cx="610" cy="610" r="8" /><circle cx="1190" cy="500" r="8" /></g>
+            <g fill="#c4b5fd"><circle cx="390" cy="356" r="7" /><circle cx="1408" cy="303" r="7" /></g>
+            <g fill="none" stroke="#fff" strokeOpacity=".1"><circle cx="610" cy="610" r="48" /><circle cx="610" cy="610" r="88" /><circle cx="1190" cy="500" r="52" /><circle cx="1190" cy="500" r="94" /></g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/25 to-slate-950/20" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_8%,rgba(2,6,23,0.38)_100%)]" />
         </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 z-10">
@@ -372,6 +395,7 @@ const Contact = () => {
                   icon: Mail,
                   title: "Email Us",
                   description: "contact@rafikizmentorship.com",
+                  href: "mailto:contact@rafikizmentorship.com",
                   color: "text-primary bg-primary/10 border-primary/20",
                 },
                 {
@@ -395,7 +419,13 @@ const Contact = () => {
                     <h3 className="font-extrabold text-slate-900 mb-2 text-lg">
                       {item.title}
                     </h3>
-                    <p className="text-slate-600 text-sm font-medium">{item.description}</p>
+                    {item.href ? (
+                      <a href={item.href} className="text-slate-600 text-sm font-medium underline decoration-slate-300 underline-offset-4 transition hover:text-primary hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm">
+                        {item.description}
+                      </a>
+                    ) : (
+                      <p className="text-slate-600 text-sm font-medium">{item.description}</p>
+                    )}
                   </CardContent>
                 </Card>
               ))}

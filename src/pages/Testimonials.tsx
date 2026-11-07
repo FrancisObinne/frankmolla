@@ -166,17 +166,17 @@
 
 // export default Testimonials;
 
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Quote, Star, Sparkles, ArrowRight } from "lucide-react";
+import { Quote, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Hero background image (using an unused gallery asset)
-import heroBg from "@/assets/gallery_7.jpg";
-
 const Testimonials = () => {
+  const [activeTopic, setActiveTopic] = useState("All stories");
+
   const testimonials = [
     {
       quote: "Rafikiz Mentorship transformed my approach to leadership. Having a mentor who understood the nuances of my industry gave me the clarity I needed to scale my team and secure our next round of funding.",
@@ -221,85 +221,119 @@ const Testimonials = () => {
       rating: 5
     }
   ];
+  const topics = ["All stories", ...new Set(testimonials.map((item) => item.program))];
+  const filteredStories = activeTopic === "All stories"
+    ? testimonials
+    : testimonials.filter((item) => item.program === activeTopic);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 selection:bg-primary/20 font-sans overflow-x-hidden">
       <Navigation />
       
-      {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+      {/* --- STORIES HERO SECTION --- */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 md:py-24 overflow-hidden border-b border-slate-200/80 bg-slate-900">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src={heroBg}
-            alt="Testimonials & Success Stories"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-top filter brightness-[0.35] contrast-[1.05]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/40" />
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+            <defs>
+              <linearGradient id="stories-hero-base" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#101827" />
+                <stop offset="50%" stopColor="#282349" />
+                <stop offset="100%" stopColor="#45223e" />
+              </linearGradient>
+              <radialGradient id="stories-hero-glow">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity=".42" />
+                <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="stories-hero-thread" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#fda4af" stopOpacity="0" />
+                <stop offset="48%" stopColor="#fda4af" stopOpacity=".58" />
+                <stop offset="100%" stopColor="#c4b5fd" stopOpacity=".1" />
+              </linearGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#stories-hero-base)" />
+            <ellipse cx="1320" cy="220" rx="540" ry="420" fill="url(#stories-hero-glow)" />
+            <path d="M-80 680 C210 550 340 790 600 620 S960 340 1190 500 1460 620 1690 300" fill="none" stroke="url(#stories-hero-thread)" strokeWidth="3" />
+            <path d="M-60 760 C220 630 390 850 670 680 S1020 430 1270 590 1480 700 1690 420" fill="none" stroke="url(#stories-hero-thread)" strokeWidth="2" opacity=".7" />
+            <g fill="#fda4af"><circle cx="285" cy="590" r="8" /><circle cx="600" cy="620" r="7" /><circle cx="1190" cy="500" r="8" /></g>
+            <g fill="none" stroke="#fff" strokeOpacity=".12"><circle cx="285" cy="590" r="44" /><circle cx="285" cy="590" r="82" /><circle cx="1190" cy="500" r="50" /><circle cx="1190" cy="500" r="92" /></g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/25 to-slate-950/20" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_8%,rgba(2,6,23,0.38)_100%)]" />
         </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 z-10">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-md">
               <Sparkles size={14} className="animate-pulse text-primary shrink-0" />
-              <span>Success Stories</span>
+              <span>Stories from our community</span>
             </div>
             
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-              What Our Mentees Say
+              Stories from people finding their next step.
             </h1>
             
             <p className="text-base sm:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl mx-auto">
-              Read real stories of breakthroughs, career transformations, and profound professional growth.
+              A challenge feels different when you don’t have to work through it alone. Explore the experiences shared by our mentorship community.
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- TESTIMONIALS GRID SECTION --- */}
+      {/* --- SEARCHABLE SUCCESS STORIES --- */}
       <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3">
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-primary/20">
-              Community Impact
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Voices of Transformation
-            </h2>
+          <div className="mx-auto mb-8 max-w-5xl space-y-3 sm:mb-10">
+            <span className="inline-flex text-[10px] font-bold uppercase tracking-[0.18em] text-primary sm:text-xs">Community stories</span>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <div>
+                <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Find a story that feels familiar.</h2>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">Search by a person, program, or challenge to explore how others have approached their next step.</p>
+              </div>
+              <p className="shrink-0 text-xs font-semibold text-slate-500 sm:text-sm" aria-live="polite">{filteredStories.length} {filteredStories.length === 1 ? "story" : "stories"}</p>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
-            {testimonials.map((item, index) => (
-              <Card 
-                key={index} 
-                className="group border border-slate-200/90 bg-slate-50/70 hover:bg-white transition-all duration-300 rounded-[1.8rem] sm:rounded-[2.2rem] p-2 shadow-sm hover:shadow-xl hover:border-primary/40 flex flex-col justify-between"
-              >
-                <CardContent className="p-6 sm:p-8 flex flex-col h-full justify-between space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center shadow-sm">
-                        <Quote size={22} />
-                      </div>
-                      <div className="flex items-center gap-1 text-amber-500">
-                        {[...Array(item.rating)].map((_, i) => (
-                          <Star key={i} size={16} fill="currentColor" />
-                        ))}
-                      </div>
-                    </div>
+          <div className="mx-auto mb-8 max-w-5xl rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 sm:mb-10 sm:rounded-[1.6rem] sm:p-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-600">Browse by mentorship topic</p>
+            <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter stories by mentorship topic">
+              {topics.map((topic) => (
+                <button
+                  key={topic}
+                  type="button"
+                  aria-pressed={activeTopic === topic}
+                  onClick={() => setActiveTopic(topic)}
+                  className={`rounded-full border px-3 py-2 text-[11px] font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:px-3.5 sm:text-xs ${activeTopic === topic ? "border-primary bg-primary text-white shadow-sm" : "border-slate-200 bg-white text-slate-600 hover:border-primary/40 hover:text-primary"}`}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
+          </div>
 
-                    <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-normal italic">
-                      "{item.quote}"
-                    </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 max-w-7xl mx-auto">
+            {filteredStories.map((item) => (
+              <Card 
+                key={item.author}
+                className="group relative border border-slate-200/90 bg-white transition-all duration-300 rounded-[1.6rem] sm:rounded-[2rem] shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-primary/40 flex flex-col justify-between"
+              >
+                <CardContent className="flex h-full flex-col justify-between p-6 sm:p-7">
+                  <div>
+                    <div className="mb-5 flex items-start justify-between gap-4">
+                      <span className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.14em] text-primary sm:text-[10px]">{item.program}</span>
+                      <Quote size={24} aria-hidden="true" className="shrink-0 text-primary/40" />
+                    </div>
+                    <blockquote className="text-[15px] leading-relaxed text-slate-700 sm:text-base">
+                      “{item.quote}”
+                    </blockquote>
                   </div>
 
-                  <div className="border-t border-slate-200/80 pt-4 mt-4">
-                    <p className="text-base font-extrabold text-slate-900">{item.author}</p>
-                    <p className="text-xs text-slate-500 font-medium mt-0.5">{item.role}</p>
-                    <div className="mt-3">
-                      <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-                        {item.program}
-                      </span>
+                  <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4">
+                    <div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-violet-100 text-sm font-extrabold text-slate-700 ring-1 ring-white">
+                      {item.author.split(" ").map((part) => part[0]).join("")}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-extrabold text-slate-900">{item.author}</p>
+                      <p className="mt-0.5 line-clamp-2 text-xs font-medium leading-relaxed text-slate-500">{item.role}</p>
                     </div>
                   </div>
                 </CardContent>

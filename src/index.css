@@ -1,8 +1,72 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes icon-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.icon-marquee-track {
+  animation: icon-marquee 38s linear infinite;
+}
+
+.mentorship-range {
+  appearance: none;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mentorship-range:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 4px;
+  border-radius: 9999px;
+}
+
+.mentorship-range::-webkit-slider-runnable-track {
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) var(--range-progress), #e2e8f0 var(--range-progress), #e2e8f0 100%);
+}
+
+.mentorship-range::-moz-range-track {
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) var(--range-progress), #e2e8f0 var(--range-progress), #e2e8f0 100%);
+}
+
+.mentorship-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: -0.48rem;
+  border: 4px solid white;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 1px 5px rgb(15 23 42 / 25%);
+}
+
+.mentorship-range::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: 4px solid white;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 1px 5px rgb(15 23 42 / 25%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-marquee-track {
+    animation: none;
+  }
+
+  .icon-marquee-viewport {
+    overflow-x: auto;
+    mask-image: none;
+  }
+}
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -109,5 +173,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   }
 }
