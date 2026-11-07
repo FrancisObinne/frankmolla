@@ -177,6 +177,7 @@ import { Link } from "react-router-dom";
 // Unused gallery assets for Programs.tsx (avoiding Home, About, and HowItWorks assets)
 import heroBg from "@/assets/gallery_15.jpg";
 import gallery16 from "@/assets/gallery_16.jpg";
+import heroImage from "@/assets/hero-mentorship-2.jpg";
 import gallery17 from "@/assets/gallery_17.jpg";
 import gallery18 from "@/assets/gallery_18.jpg";
 import gallery19 from "@/assets/gallery_19.jpg";
@@ -189,7 +190,7 @@ const Programs = () => {
       title: "Career Development",
       description: "Navigate your career path with guidance from industry professionals. Get advice on career transitions, promotions, and professional growth.",
       areas: ["Career planning", "Interview preparation", "Skill development", "Leadership coaching"],
-      image: gallery16,
+      image: heroImage,
       badgeColor: "bg-blue-50 text-blue-600 border-blue-200"
     },
     {
